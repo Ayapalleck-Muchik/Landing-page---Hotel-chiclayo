@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-moche-gold: #C5A059;
+  --color-moche-gold-dark: #9e7d38;
+  --color-moche-gold-light: #DFCA9D;
+  --color-moche-terracotta: #A43B2C;
+  --color-moche-dark: #141312;
+  --color-moche-charcoal: #1E1D1B;
+  --color-moche-stone: #282725;
+  --color-moche-bone: #FAF8F5;
+  --color-moche-sand: #F4EFE7;
+  --color-moche-linen: #EDE6DC;
+  --color-moche-border: #E4DCD0;
+
+  /* Typography: Marcellus (Primary Serif Titles) & Jost (Secondary Sans Clean Body) */
+  --font-serif: "Marcellus", "Playfair Display", Georgia, serif;
+  --font-sans: "Jost", system-ui, -apple-system, sans-serif;
+
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+  --letter-spacing-super-wide: 0.25em;
+  --letter-spacing-monumental: 0.35em;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    background-color: var(--color-moche-bone);
+    color: var(--color-moche-dark);
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-serif);
+    letter-spacing: 0.035em;
+  }
+
+  p, span, a, li, input, select, textarea {
+    font-family: var(--font-sans);
+  }
+}
+
+.hero-mask {
+  background: linear-gradient(180deg, rgba(20,19,18,0.75) 0%, rgba(20,19,18,0.45) 45%, rgba(20,19,18,0.92) 100%);
+}
+
+.text-balance {
+  text-wrap: balance;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Hotel Ayapalleck Muchik",
+  "description": "Santuario boutique y refugio arquitectónico de inspiración Mochica en Chiclayo y Lambayeque, Perú. Suites exclusivas, alta cocina norteña y máxima seguridad.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
