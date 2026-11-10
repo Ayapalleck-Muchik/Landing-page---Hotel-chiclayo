@@ -7,6 +7,11 @@ interface BentoServicesProps {
   onOpenBreakfastDetails: () => void;
 }
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenBreakfastDetails }) => {
   const reduceMotion = useReducedMotion();
   const breakfast = realHotelServices.find((s) => s.id === 'desayuno-excepcional')!;
@@ -34,12 +39,12 @@ export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenBreakfastDet
 
         {/* High-End Bento Box Grid */}
         <motion.div className="grid grid-cols-1 md:grid-cols-12 gap-6"
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={reduceMotion ? false : 'hidden'}
+          whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.55, ease: 'easeOut' }}>
+          variants={{ visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.1 } } }}>
           {/* Bento Card 1: Desayunos Premium (7 Columns) */}
-          <div className="md:col-span-7 bg-white border border-[#E4DCD0] hover:border-[#C5A059] p-8 sm:p-10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
+          <motion.div variants={cardVariants} transition={{ duration: 0.5, ease: 'easeOut' }} className="md:col-span-7 bg-white border border-[#E4DCD0] hover:border-[#C5A059] p-8 sm:p-10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
             <div className="absolute top-0 right-0 w-36 h-36 bg-[#C5A059]/5 rounded-bl-full pointer-events-none transition-transform group-hover:scale-110" />
 
             <div>
@@ -82,10 +87,10 @@ export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenBreakfastDet
               </button>
               <span className="text-[11px] text-neutral-400">Servido de 07:00 a 10:00</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Bento Card 2: Ubicación y Seguridad Premium (5 Columns) */}
-          <div className="md:col-span-5 bg-[#141312] text-white border border-[#C5A059]/40 p-8 sm:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group relative">
+          <motion.div variants={cardVariants} transition={{ duration: 0.5, ease: 'easeOut' }} className="md:col-span-5 bg-[#141312] text-white border border-[#C5A059]/40 p-8 sm:p-10 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group relative">
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="w-12 h-12 rounded bg-white/10 border border-[#C5A059]/40 flex items-center justify-center text-[#C5A059]">
@@ -123,10 +128,10 @@ export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenBreakfastDet
             <div className="mt-8 pt-4 border-t border-neutral-800 text-[10px] tracking-[0.25em] uppercase text-[#DFCA9D]">
               Centro de Chiclayo
             </div>
-          </div>
+          </motion.div>
 
           {/* Bento Card 3: Tu Punto de Partida Perfecto (6 Columns) */}
-          <div className="md:col-span-6 bg-white border border-[#E4DCD0] hover:border-[#C5A059] p-8 sm:p-10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <motion.div variants={cardVariants} transition={{ duration: 0.5, ease: 'easeOut' }} className="md:col-span-6 bg-white border border-[#E4DCD0] hover:border-[#C5A059] p-8 sm:p-10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
             <div>
               <div className="w-12 h-12 rounded bg-[#FAF8F5] border border-[#E4DCD0] flex items-center justify-center text-[#C5A059] mb-6 group-hover:border-[#C5A059] transition-colors">
                 <Footprints className="w-6 h-6" />
@@ -153,10 +158,10 @@ export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenBreakfastDet
               <span>Centro de Chiclayo</span>
               <span>A tu ritmo</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Bento Card 4: Conectividad Wi-Fi (6 Columns) */}
-          <div className="md:col-span-6 bg-white border border-[#E4DCD0] hover:border-[#C5A059] p-8 sm:p-10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+          <motion.div variants={cardVariants} transition={{ duration: 0.5, ease: 'easeOut' }} className="md:col-span-6 bg-white border border-[#E4DCD0] hover:border-[#C5A059] p-8 sm:p-10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
             <div>
               <div className="w-12 h-12 rounded bg-[#FAF8F5] border border-[#E4DCD0] flex items-center justify-center text-[#C5A059] mb-6 group-hover:border-[#C5A059] transition-colors">
                 <Wifi className="w-6 h-6" />
@@ -193,7 +198,7 @@ export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenBreakfastDet
             <div className="mt-8 pt-4 border-t border-[#E4DCD0]/70 text-[10px] tracking-[0.25em] uppercase text-neutral-500">
               Conexión disponible
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
