@@ -55,12 +55,12 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden" />
               <div className="absolute top-6 left-6 bg-[#141312]/90 backdrop-blur-md px-4 py-1.5 border border-[#C5A059]/40 text-[#C5A059] text-[10px] tracking-[0.35em] uppercase font-semibold">
-                Suite Insignia • Desayuno Incluido
+                Habitación King • Desayuno Incluido
               </div>
               <div className="absolute bottom-6 left-6 text-white lg:hidden">
                 <span className="text-xs uppercase tracking-wider text-[#DFCA9D]">Desde</span>
                 <p className="text-2xl font-serif">
-                  ${heroSuite.pricePerNightUsd} USD{' '}
+                  S/ {heroSuite.pricePerNightPen}{' '}
                   <span className="text-xs font-sans font-light">/ noche</span>
                 </p>
               </div>
@@ -103,8 +103,7 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                     Tarifa por noche
                   </span>
                   <span className="text-2xl sm:text-3xl font-serif font-normal text-[#141312]">
-                    ${heroSuite.pricePerNightUsd}{' '}
-                    <span className="text-xs font-sans font-light text-neutral-500">USD</span>
+                    S/ {heroSuite.pricePerNightPen}
                   </span>
                 </div>
 
@@ -113,7 +112,7 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                   type="button"
                   className="inline-flex items-center gap-2 bg-[#141312] hover:bg-[#C5A059] hover:text-[#141312] text-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] transition-all duration-300 group cursor-pointer active:scale-95 shadow-sm"
                 >
-                  <span>Reservar Suite</span>
+                  <span>Reservar Habitación</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </div>
@@ -123,7 +122,7 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
           {/* SECONDARY ROOMS (2-Column Grid) */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             {secondarySuites.map((room) => {
-              const isExec = room.id === 'habitacion-ejecutiva-superior';
+              const featureIcons = [Bed, Laptop, Wind, Coffee];
               return (
                 <article
                   key={room.id}
@@ -165,45 +164,15 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                       </p>
 
                       <div className="grid grid-cols-2 gap-2.5 text-[11px] text-neutral-700 py-4 border-t border-b border-[#E4DCD0]">
-                        {isExec ? (
-                          <>
-                            <div className="flex items-center gap-2">
-                              <Bed className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>1 Cama Queen Plush</span>
+                        {room.features.map((feature, index) => {
+                          const FeatureIcon = featureIcons[index] || Wifi;
+                          return (
+                            <div key={feature.label} className="flex items-center gap-2">
+                              <FeatureIcon className="w-3.5 h-3.5 text-[#C5A059]" />
+                              <span>{feature.label}</span>
                             </div>
-                            <div className="flex items-center gap-2">
-                              <Laptop className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>Escritorio de Trabajo</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Wind className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>Climatizador Silencioso</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Coffee className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>Desayuno de Cortesía</span>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div className="flex items-center gap-2">
-                              <Bed className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>2 Twin o 1 Matrimonial</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Coffee className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>Desayuno de Cortesía</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Wifi className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>Wi-Fi Alta Velocidad</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <Wind className="w-3.5 h-3.5 text-[#C5A059]" />
-                              <span>Ambiente Ventilado</span>
-                            </div>
-                          </>
-                        )}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -214,10 +183,8 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                         Desde
                       </span>
                       <span className="text-2xl font-serif text-[#141312]">
-                        ${room.pricePerNightUsd}{' '}
-                        <span className="text-xs font-sans text-neutral-500 font-light">
-                          USD / noche
-                        </span>
+                        S/ {room.pricePerNightPen}{' '}
+                        <span className="text-xs font-sans text-neutral-500 font-light">/ noche</span>
                       </span>
                     </div>
 

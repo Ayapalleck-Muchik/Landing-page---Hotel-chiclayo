@@ -11,13 +11,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
       {/* Background Image Container */}
       <div className="absolute inset-0 w-full h-full bg-[#141312]">
         <img
-          src="https://lh3.googleusercontent.com/aida/AEtjO1UNtPdpmfEw-AJSsmUBqG9HbRadTA9DmZ8EQwxGzL_VusfzRYnQklGNCa2bISNzM7fxbMXYZ84Np9khspJjdtgIpbCkFIdWZyDumDVZekZ2vyvemuUdDogW00ghs1psBilVrgjiMNRaD-y0ahNbRJTRCm43yTfDOQCsG4qeXCB9lik3we9rdEWmYb1IMBAZWHWzS9ec9fI1Hl-p7n-gj9MlEB1bmnKkVoz4eL1Yx-5DMqErXwvqskitZoA"
-          alt="Habitaciones modernas en Hotel Ayapalleck Muchik Chiclayo"
-          className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000 ease-out"
+          src="/images-hotel/fachada.jpg"
+          alt="Fachada del Hotel Ayapalleck Muchik en Chiclayo"
+          className="w-full h-full object-cover object-[center_78%] transition-transform duration-1000 ease-out"
           referrerPolicy="no-referrer"
         />
         {/* Darkened Gradient Mask for clean contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#141312]/85 via-[#141312]/55 to-[#141312]/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#141312]/75 via-[#141312]/45 to-[#141312]/85" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center pt-14 pb-24">
