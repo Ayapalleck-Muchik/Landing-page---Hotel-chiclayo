@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { hotelRooms } from '../data/roomsData';
 import { addLocalDays, formatLocalDate, isValidStay, minimumCheckOutDate } from '../utils/bookingDates';
@@ -9,9 +9,10 @@ interface BookingSearchBoxProps {
     checkOut: string;
     suiteId: string;
   }) => void;
+  onDraftChange?: (params: { checkIn: string; checkOut: string; suiteId: string }) => void;
 }
 
-export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) => {
+export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch, onDraftChange }) => {
   // Set default dates using the visitor's local calendar day.
   const today = new Date();
   const tomorrow = addLocalDays(today, 1);
@@ -21,6 +22,10 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
   const [checkOut, setCheckOut] = useState(formatLocalDate(nextDay));
   const [suiteId, setSuiteId] = useState(hotelRooms[0].id);
   const [dateError, setDateError] = useState('');
+
+  useEffect(() => {
+    onDraftChange?.({ checkIn, checkOut, suiteId });
+  }, [checkIn, checkOut, onDraftChange, suiteId]);
 
   const handleCheckInChange = (value: string) => {
     setCheckIn(value);

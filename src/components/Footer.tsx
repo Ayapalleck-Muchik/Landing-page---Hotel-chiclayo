@@ -33,26 +33,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             <p className="text-xs text-neutral-400 leading-relaxed font-light">
               Un lugar cálido para descansar en el centro de Chiclayo. El desayuno está incluido con tu estadía.
             </p>
-            <div className="flex gap-3 text-neutral-400">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook del Hotel Ayapalleck Muchik"
-                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center hover:border-[#C5A059] hover:text-[#C5A059] transition"
-              >
-                <span className="text-[11px] font-bold">f</span>
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram del Hotel Ayapalleck Muchik"
-                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center hover:border-[#C5A059] hover:text-[#C5A059] transition"
-              >
-                <span className="text-[11px] font-bold">ig</span>
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -78,7 +58,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </li>
               <li>
                 <a href="#ubicacion" className="hover:text-[#C5A059] transition">
-                  Ubicación &amp; Seguridad
+                  Ubicación
                 </a>
               </li>
             </ul>
@@ -103,7 +83,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 <span>Ubicación céntrica peatonal</span>
               </li>
               <li className="pt-2 text-[11px] text-neutral-500">
-                Check-in 14:00 • Check-out 12:00 • Recepción 24h
+                Check-in desde las 06:00 • Check-out hasta las 12:00 del día siguiente • Recepción 24h
               </li>
             </ul>
           </div>

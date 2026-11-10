@@ -3,6 +3,8 @@ import { WelcomeModal } from './components/WelcomeModal';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
 import { BookingSearchBox } from './components/BookingSearchBox';
+import { StickyBookingBar } from './components/StickyBookingBar';
+import { BookingAdvantagesSection } from './components/BookingAdvantagesSection';
 import { BentoServices } from './components/BentoServices';
 import { SuitesSection } from './components/SuitesSection';
 import { BreakfastSection } from './components/BreakfastSection';
@@ -55,9 +57,11 @@ export default function App() {
         />
 
         {/* 04. Barra de Disponibilidad Acoplada */}
-        <BookingSearchBox onSearch={handleSearchDates} />
+        <BookingSearchBox onSearch={handleSearchDates} onDraftChange={setBookingParams} />
 
-        {/* 05. Bento Box de Servicios (Desayuno Premium, Seguridad frente a Comisaría, Punto de Partida Peatonal, Wi-Fi) */}
+        <BookingAdvantagesSection />
+
+        {/* 05. Servicios confirmados del hotel */}
         <BentoServices onOpenBreakfastDetails={() => setIsBreakfastModalOpen(true)} />
 
         {/* 06. Colección de Habitaciones & Suites */}
@@ -66,7 +70,7 @@ export default function App() {
         {/* 07. Especialistas en tus Mañanas - Desayunos Premium de Cortesía */}
         <BreakfastSection onOpenBooking={() => handleOpenBooking()} />
 
-        {/* 08. Ubicación Céntrica en Chiclayo & Seguridad 24/7 (Frente a Comisaría) */}
+        {/* 08. Ubicación en el centro de Chiclayo */}
         <LocationContactSection />
 
         {/* 09. Testimonios Verificados de Huéspedes */}
@@ -78,6 +82,12 @@ export default function App() {
 
       {/* 11. Botón Flotante de WhatsApp (ÚNICO elemento verde en la app) */}
       <WhatsAppButton />
+
+      <StickyBookingBar
+        draft={bookingParams}
+        hidden={isBookingModalOpen || isBreakfastModalOpen || isWelcomeModalOpen}
+        onOpenBooking={() => handleOpenBooking(bookingParams)}
+      />
 
       {/* Modals Interactivos */}
       <WelcomeModal

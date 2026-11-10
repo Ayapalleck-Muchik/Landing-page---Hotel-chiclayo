@@ -5,8 +5,8 @@ import { RealHotelService } from '../types';
  * SERVICIOS DEL HOTEL AYAPALLECK MUCHIK (Boutique Urbano de Ciudad)
  * 
  * Enfoque en vender beneficios, valor y experiencia:
- * - Especialistas en mañanas con desayuno premium de cortesía.
- * - Ubicación y seguridad premium frente a la comisaría de Chiclayo.
+ * - Desayuno incluido para empezar la mañana con calma.
+ * - Ubicación frente a la comisaría de Chiclayo.
  * - Punto de partida perfecto para caminar y disfrutar la ciudad.
  * - Conectividad Wi-Fi de alta velocidad en todas las áreas.
  * ============================================================================

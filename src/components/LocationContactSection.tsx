@@ -62,7 +62,7 @@ export const LocationContactSection: React.FC = () => {
                 </span>
                 <p className="font-medium text-[#141312] flex items-center gap-2">
                   <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
-                  Recepción 24 Horas • Check-in: 14:00 • Check-out: 12:00
+                  Recepción 24 Horas • Check-in desde las 06:00 • Check-out hasta las 12:00 del día siguiente
                 </p>
               </div>
             </div>

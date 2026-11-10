@@ -13,8 +13,8 @@
   --color-moche-linen: #EDE6DC;
   --color-moche-border: #E4DCD0;
 
-  /* Typography: Marcellus (Primary Serif Titles) & Jost (Secondary Sans Clean Body) */
-  --font-serif: "Marcellus", "Playfair Display", Georgia, serif;
+  /* Typography: Cormorant Garamond (Editorial Titles) & Jost (Body/Menus) */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Jost", system-ui, -apple-system, sans-serif;
 
   --letter-spacing-wide: 0.025em;
@@ -30,11 +30,13 @@
     font-weight: 300;
     background-color: var(--color-moche-bone);
     color: var(--color-moche-dark);
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   h1, h2, h3, h4, h5, h6, .font-serif {
     font-family: var(--font-serif);
-    letter-spacing: 0.035em;
+    letter-spacing: -0.01em;
   }
 
   p, span, a, li, input, select, textarea {
