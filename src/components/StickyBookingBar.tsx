@@ -34,7 +34,8 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
 
   useEffect(() => {
     const updateVisibility = () => {
-      const nextVisible = window.scrollY > 620;
+      const threshold = window.innerWidth < 640 ? window.innerHeight + 360 : 620;
+      const nextVisible = window.scrollY > threshold;
       setIsVisible((current) => (current === nextVisible ? current : nextVisible));
     };
 
