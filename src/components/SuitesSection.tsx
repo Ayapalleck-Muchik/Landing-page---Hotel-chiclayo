@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, Bed, Laptop, Wind, Wifi, Coffee, Sparkles } from 'lucide-react';
+import { motion, useReducedMotion } from 'motion/react';
 import { hotelRooms } from '../data/roomsData';
 import { Room } from '../types';
 import { RoomModal } from './RoomModal';
@@ -9,6 +10,7 @@ interface SuitesSectionProps {
 }
 
 export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
+  const reduceMotion = useReducedMotion();
   const [selectedRoomForModal, setSelectedRoomForModal] = useState<Room | null>(null);
 
   const heroSuite = hotelRooms[0];
@@ -21,7 +23,7 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[#E4DCD0]">
           <div>
             <span className="text-[#C5A059] font-semibold tracking-[0.35em] uppercase text-[11px] block mb-2">
-              Confort Urbano &amp; Descanso
+              Habitaciones
             </span>
             <h2 className="text-3xl sm:text-5xl font-serif text-[#141312] font-light">
               Nuestras Habitaciones en el Centro
@@ -29,11 +31,10 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
           </div>
           <div className="text-neutral-600 text-xs sm:text-sm font-light max-w-md mt-4 md:mt-0 leading-relaxed space-y-1">
             <p>
-              Ambientes silenciosos con aislamiento acústico integral y climatización para un descanso
-              ininterrumpido tras recorrer la ciudad.
+              Tres opciones para descansar y hacer de Chiclayo tu punto de partida.
             </p>
             <p className="text-[#9e7d38] font-medium flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" /> Todas las tarifas incluyen desayuno de cortesía.
+              <Sparkles className="w-3.5 h-3.5" /> Todas las tarifas incluyen desayuno.
             </p>
           </div>
         </div>
@@ -47,11 +48,15 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
               onClick={() => setSelectedRoomForModal(heroSuite)}
               className="lg:col-span-7 relative min-h-[360px] lg:min-h-[500px] overflow-hidden group cursor-pointer"
             >
-              <img
+              <motion.img
                 src={heroSuite.image}
                 alt={heroSuite.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
+                initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden" />
               <div className="absolute top-6 left-6 bg-[#141312]/90 backdrop-blur-md px-4 py-1.5 border border-[#C5A059]/40 text-[#C5A059] text-[10px] tracking-[0.35em] uppercase font-semibold">
@@ -112,7 +117,7 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                   type="button"
                   className="inline-flex items-center gap-2 bg-[#141312] hover:bg-[#C5A059] hover:text-[#141312] text-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] transition-all duration-300 group cursor-pointer active:scale-95 shadow-sm"
                 >
-                  <span>Reservar Habitación</span>
+                  <span>Consultar habitación</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </div>
@@ -133,11 +138,15 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                       onClick={() => setSelectedRoomForModal(room)}
                       className="relative h-72 overflow-hidden cursor-pointer"
                     >
-                      <img
+                      <motion.img
                         src={room.image}
                         alt={room.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         referrerPolicy="no-referrer"
+                        initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true, amount: 0.25 }}
+                        transition={{ duration: 0.65, ease: 'easeOut' }}
                       />
                       <div className="absolute top-4 left-4 bg-[#141312]/90 backdrop-blur-md px-3.5 py-1 border border-[#C5A059]/30 text-[#C5A059] text-[9px] tracking-[0.35em] uppercase font-semibold">
                         {room.badge}
@@ -193,7 +202,7 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                       type="button"
                       className="inline-flex items-center gap-2 text-[#141312] hover:text-[#C5A059] text-xs font-semibold uppercase tracking-[0.25em] border-b border-[#141312] pb-1 hover:border-[#C5A059] transition-colors duration-300 cursor-pointer active:scale-95"
                     >
-                      <span>Reservar Habitación</span>
+                      <span>Consultar habitación</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>

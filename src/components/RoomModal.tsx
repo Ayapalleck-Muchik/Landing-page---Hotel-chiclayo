@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Check, ArrowRight, Coffee, ShieldCheck, Wifi, Wind } from 'lucide-react';
+import { X, ArrowRight } from 'lucide-react';
 import { Room } from '../types';
 
 interface RoomModalProps {
@@ -72,7 +72,7 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSelectFor
             <div>
               <div className="flex items-center justify-between text-[11px] text-neutral-500 uppercase tracking-[0.25em] mb-2">
                 <span>{room.refCode}</span>
-                <span>{room.surfaceM2} m² • {room.bedType}</span>
+                <span>{room.bedType}</span>
               </div>
 
               <h2 className="text-2xl sm:text-3xl font-serif text-[#141312] font-light leading-snug mb-3">
@@ -98,20 +98,9 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSelectFor
                 </div>
               </div>
 
-              {/* Amenities List */}
-              <div className="mb-6 pt-4 border-t border-[#E4DCD0]">
-                <h4 className="text-[11px] font-semibold text-neutral-800 uppercase tracking-[0.2em] mb-3">
-                  Comodidades Incluidas
-                </h4>
-                <ul className="space-y-2 text-xs text-neutral-600 font-light">
-                  {room.amenities.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <Check className="w-3.5 h-3.5 text-[#C5A059] shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <p className="mb-6 pt-4 border-t border-[#E4DCD0] text-xs text-neutral-600 font-light leading-relaxed">
+                Si tienes alguna preferencia para tu estadía, consulta directamente con el hotel.
+              </p>
             </div>
 
             {/* Price & Action */}
@@ -133,7 +122,7 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSelectFor
                 type="button"
                 className="inline-flex items-center gap-2 bg-[#141312] hover:bg-[#C5A059] text-white hover:text-[#141312] px-6 py-3 text-xs font-semibold uppercase tracking-[0.22em] transition-all duration-300 cursor-pointer shadow-md active:scale-95"
               >
-                <span>Reservar Habitación</span>
+                <span>Consultar habitación</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>

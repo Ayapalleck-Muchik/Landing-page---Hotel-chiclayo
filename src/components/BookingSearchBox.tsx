@@ -47,12 +47,12 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-[#C5A059] rounded-full animate-pulse" />
             <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-neutral-800">
-              Verificar Disponibilidad • Tarifas Exclusivas
+              Consulta disponibilidad
             </span>
           </div>
           <span className="text-[11px] text-neutral-500 tracking-wider flex items-center gap-1.5">
             <Sparkles className="w-3 h-3 text-[#C5A059]" />
-            Mejor tarifa garantizada directa
+            Elige fechas y habitación
           </span>
         </div>
 

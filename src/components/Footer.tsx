@@ -31,8 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </div>
             </div>
             <p className="text-xs text-neutral-400 leading-relaxed font-light">
-              Tu descanso perfecto en el centro de Chiclayo. Confort moderno, seguridad 24/7 frente a
-              la comisaría y el mejor desayuno de cortesía cada mañana.
+              Un lugar cálido para descansar en el centro de Chiclayo. El desayuno está incluido con tu estadía.
             </p>
             <div className="flex gap-3 text-neutral-400">
               <a
@@ -88,16 +87,16 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
           {/* Real Services & Mobility Notice */}
           <div>
             <h4 className="text-white font-serif text-sm uppercase tracking-[0.25em] mb-5">
-              Políticas Clave
+              Durante tu estadía
             </h4>
             <ul className="space-y-2 text-xs font-light text-neutral-400">
               <li className="flex items-center gap-1.5">
                 <Coffee className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Desayuno incluido de cortesía</span>
+                <span>Desayuno incluido</span>
               </li>
               <li className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Frente a la comisaría (Seguridad 24/7)</span>
+                <span>Frente a la comisaría</span>
               </li>
               <li className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
@@ -115,15 +114,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               Reservas Directas
             </h4>
             <p className="text-xs text-neutral-400 mb-5 leading-relaxed font-light">
-              Asegura tu habitación con la mejor tarifa garantizada para la visita papal y estancias
-              en Chiclayo.
+              Consulta fechas y habitaciones directamente con el hotel.
             </p>
             <button
               onClick={onOpenBooking}
               type="button"
               className="inline-flex items-center gap-2 border border-[#C5A059]/60 text-[#C5A059] hover:bg-[#C5A059] hover:text-[#141312] px-5 py-3 text-[11px] uppercase tracking-[0.25em] font-medium transition duration-300 w-full justify-center cursor-pointer active:scale-95"
             >
-              <span>Reservar Ahora</span>
+              <span>Consultar disponibilidad</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

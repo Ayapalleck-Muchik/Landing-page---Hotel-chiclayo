@@ -25,7 +25,7 @@ export const BreakfastModal: React.FC<BreakfastModalProps> = ({
             </div>
             <div>
               <span className="text-[#DFCA9D] text-[10px] tracking-[0.25em] uppercase font-semibold block">
-                Cortesía de la Casa
+                Incluido con tu estadía
               </span>
               <h3 className="text-xl font-serif font-light">Desayuno Diario Incluido</h3>
             </div>
@@ -43,32 +43,26 @@ export const BreakfastModal: React.FC<BreakfastModalProps> = ({
         {/* Content */}
         <div className="p-6 sm:p-8 space-y-6">
           <p className="text-sm text-neutral-700 font-light leading-relaxed">
-            "Especialistas en tus mañanas. Dedicamos toda nuestra atención a prepararte un desayuno
-            premium de cortesía. Para el resto del día, nuestra ubicación privilegiada te permitirá
-            descubrir los restaurantes y picanterías más afamados del centro histórico a solo
-            minutos caminando."
+            El desayuno está incluido con tu estadía. Para conocer el servicio disponible durante tu visita,
+            consulta directamente con el equipo del hotel.
           </p>
 
           <div className="bg-[#FAF8F5] border border-[#E4DCD0] p-4 text-xs space-y-2 text-neutral-600">
             <div className="flex items-center gap-2 text-[#141312] font-semibold uppercase tracking-wider">
               <Clock className="w-4 h-4 text-[#C5A059]" />
-              <span>Horario de Atención: 07:00 am a 10:00 am</span>
+              <span>Información del servicio</span>
             </div>
-            <p>Servido en nuestro acogedor comedor de la planta baja.</p>
+            <p>El equipo del hotel podrá orientarte sobre horarios y opciones durante tu estadía.</p>
           </div>
 
           <div>
             <h4 className="text-xs font-semibold text-neutral-800 uppercase tracking-wider mb-3">
-              Incluye para cada huésped:
+              Durante tu estadía
             </h4>
             <ul className="space-y-2.5 text-xs text-neutral-700">
               {[
-                'Cesta de panes frescos y tostadas artesanales',
-                'Café recién pasado del norte peruano y leche fresca',
-                'Variedad de té orgánico e infusiones digestivas',
-                'Jugo natural de fruta fresca de la temporada',
-                'Mantequilla de campo, mermeladas y quesillo',
-                'Opciones de huevos al gusto preparados al instante',
+                'Desayuno incluido con tu reserva',
+                'Información de servicio disponible con el hotel',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-2.5">
                   <Check className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
@@ -78,13 +72,8 @@ export const BreakfastModal: React.FC<BreakfastModalProps> = ({
             </ul>
           </div>
 
-          {/* Location culinary advantage */}
-          <div className="p-4 bg-[#FAF8F5] border-l-2 border-[#C5A059] text-xs text-neutral-700 font-light">
-            <strong className="text-[#141312] font-semibold block mb-0.5">
-              Gastronomía chiclayana a tu alcance:
-            </strong>
-            Nuestra ubicación céntrica te sitúa a pasos de los templos del arroz con pato, cebiches y
-            espesados más reconocidos de Chiclayo para tus almuerzos y cenas.
+          <div className="p-4 bg-[#FAF8F5] border border-[#E4DCD0] text-xs text-neutral-700 font-light">
+            Si tienes alguna preferencia o consulta, escríbenos antes de tu llegada.
           </div>
         </div>
 
@@ -105,7 +94,7 @@ export const BreakfastModal: React.FC<BreakfastModalProps> = ({
             type="button"
             className="inline-flex items-center gap-2 bg-[#C5A059] hover:bg-[#9e7d38] text-[#141312] px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] transition-all shadow"
           >
-            <span>Reservar Ahora</span>
+            <span>Consultar habitación</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
