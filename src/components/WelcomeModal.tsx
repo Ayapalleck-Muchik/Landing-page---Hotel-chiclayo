@@ -42,7 +42,7 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onCheckAvailability 
           <img
             src="/images-hotel/elpapa-chiclayo.jpg"
             alt="Histórica Visita Papal en Chiclayo"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[18%_center] md:object-[15%_center]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
           <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-[#141312]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#C5A059]/30 text-white text-[11px] tracking-wider uppercase">
