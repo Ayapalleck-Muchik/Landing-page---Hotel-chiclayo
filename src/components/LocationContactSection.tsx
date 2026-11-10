@@ -76,7 +76,7 @@ export const LocationContactSection: React.FC = () => {
                 </span>
                 <p className="font-medium text-[#141312] flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
-                  +51 999 999 999
+                  +51 978 007 640
                   <span className="text-neutral-300">·</span>
                   <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
                   reservas@ayapalleckmuchik.com
@@ -95,7 +95,7 @@ export const LocationContactSection: React.FC = () => {
             </div>
 
             <a
-              href="https://maps.google.com/?q=Chiclayo+Lambayeque+Peru"
+              href="https://maps.app.goo.gl/Cy6rwLHwrSdT3gB96"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-[#141312] hover:bg-[#1E1D1B] text-[#C5A059] border border-[#C5A059]/40 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] transition-all duration-300 shadow-sm active:scale-95"
@@ -114,15 +114,15 @@ export const LocationContactSection: React.FC = () => {
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-[#141312]/60 backdrop-blur-[0.5px]" />
+              <div className="absolute inset-0 bg-[#141312]/30 backdrop-blur-[0.5px]" />
               <div className="relative z-10 h-full flex flex-col items-center justify-center text-center p-6 text-white">
                 <div className="w-14 h-14 rounded-full border border-[#C5A059]/60 text-[#C5A059] flex items-center justify-center text-xl mb-4 bg-[#141312]/80 shadow-md">
                   <ShieldCheck className="w-7 h-7" />
                 </div>
-                <h4 className="text-2xl sm:text-3xl font-serif font-light mb-2">
+                <h4 className="text-2xl sm:text-3xl font-serif font-light mb-2 [text-shadow:0_1px_3px_rgb(0_0_0_/_0.8)]">
                   Hotel Ayapalleck Muchik
                 </h4>
-                <p className="text-neutral-300 text-xs sm:text-sm font-light max-w-sm mb-6 leading-relaxed">
+                <p className="text-neutral-100 text-xs sm:text-sm font-light max-w-sm mb-6 leading-relaxed [text-shadow:0_1px_3px_rgb(0_0_0_/_0.8)]">
                   Ubicación inmejorable en el centro de Chiclayo, frente a la comisaría. Tranquilidad
                   absoluta y la ciudad al alcance de tus pasos.
                 </p>

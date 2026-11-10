@@ -88,15 +88,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 - Llegada: ${checkIn}
 - Salida: ${checkOut} (${nights} noches)
 - Huéspedes: ${guests}
-- Titular: ${guestName || 'Por definir'}
+- Nombre: ${guestName || 'Por definir'}
 - Teléfono: ${guestPhone || 'No especificado'}
-${notes ? `- Requerimientos: ${notes}` : ''}
+- Observaciones: ${notes || 'Ninguna'}
 - Desayuno incluido
 - Total estimado: S/ ${totalPrice}
 - Solicitud pendiente de confirmación por el hotel.`;
 
     const encoded = encodeURIComponent(message);
-    const waUrl = `https://wa.me/51999999999?text=${encoded}`;
+    const waUrl = `https://wa.me/51978007640?text=${encoded}`;
 
     // Open WhatsApp
     window.open(waUrl, '_blank', 'noopener,noreferrer');
@@ -133,12 +133,12 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                 <Check className="w-8 h-8" />
               </div>
               <h4 className="text-2xl font-serif text-[#141312]">
-                Solicitud enviada por WhatsApp
+                Solicitud lista para enviar
               </h4>
               <p className="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto leading-relaxed">
-                Tu solicitud para <strong>{currentRoom.title}</strong> por {nights} noches (S/ {totalPrice})
-                está pendiente de confirmación por el hotel. El desayuno está incluido. Si la ventana de
-                WhatsApp no se abrió automáticamente, puedes presionar el botón inferior.
+                Revisa y envía el mensaje por WhatsApp para solicitar <strong>{currentRoom.title}</strong> por{' '}
+                {nights} noches (S/ {totalPrice}). La reserva queda pendiente de confirmación por el hotel;
+                el desayuno está incluido.
               </p>
 
               <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
@@ -162,13 +162,13 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
             <form onSubmit={handleConfirmReservation} className="space-y-5">
               {/* Room Selection */}
               <div>
-                <label className="block text-[11px] font-semibold text-neutral-700 uppercase tracking-[0.2em] mb-2">
-                  Seleccionar Suite o Habitación
+                <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+                  Habitación
                 </label>
                 <select
                   value={selectedRoomId}
                   onChange={(e) => setSelectedRoomId(e.target.value)}
-                  className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] px-4 py-3 text-xs text-neutral-800 outline-none transition"
+                  className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3.5 text-sm text-neutral-800 outline-none transition"
                 >
                   {hotelRooms.map((room) => (
                     <option key={room.id} value={room.id}>
@@ -181,21 +181,21 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
               {/* Dates & Guests */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                    Check-in
+                  <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+                    Llegada
                   </label>
                   <input
                     type="date"
                     value={checkIn}
                     min={formatLocalDate(today)}
                     onChange={(e) => handleCheckInChange(e.target.value)}
-                    className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] px-3 py-2.5 text-xs text-neutral-800 outline-none"
+                    className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3 text-sm text-neutral-800 outline-none"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                    Check-out
+                  <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+                    Salida
                   </label>
                   <input
                     type="date"
@@ -205,18 +205,18 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                       setCheckOut(e.target.value);
                       setDateError('');
                     }}
-                    className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] px-3 py-2.5 text-xs text-neutral-800 outline-none"
+                    className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3 text-sm text-neutral-800 outline-none"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
                     Huéspedes
                   </label>
                   <select
                     value={guests}
                     onChange={(e) => setGuests(Number(e.target.value))}
-                    className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] px-3 py-2.5 text-xs text-neutral-800 outline-none"
+                    className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3 text-sm text-neutral-800 outline-none"
                   >
                     <option value={1}>1 Persona</option>
                     <option value={2}>2 Personas</option>
@@ -235,43 +235,43 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
               {/* Client Info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                    Nombre del Titular
+                  <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+                    Nombre
                   </label>
                   <input
                     type="text"
                     placeholder="Ej. Juan Pérez"
                     value={guestName}
                     onChange={(e) => setGuestName(e.target.value)}
-                    className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] px-3 py-2.5 text-xs text-neutral-800 outline-none"
+                    className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3 text-sm text-neutral-800 outline-none"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                    Teléfono / WhatsApp
+                  <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+                    WhatsApp
                   </label>
                   <input
                     type="tel"
                     placeholder="+51 987 654 321"
                     value={guestPhone}
                     onChange={(e) => setGuestPhone(e.target.value)}
-                    className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] px-3 py-2.5 text-xs text-neutral-800 outline-none"
+                    className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3 text-sm text-neutral-800 outline-none"
                   />
                 </div>
               </div>
 
               {/* Special Notes */}
               <div>
-                <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-wider mb-1.5">
-                  Requerimientos Especiales (Opcional)
+                <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+                  Observaciones (opcional)
                 </label>
                 <textarea
                   rows={2}
                   placeholder="Hora estimada de llegada, traslados desde aeropuerto, preferencias de cama..."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] p-3 text-xs text-neutral-800 outline-none resize-none"
+                  className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 p-3.5 text-sm text-neutral-800 outline-none resize-none"
                 />
               </div>
 
@@ -281,6 +281,9 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                   <span className="text-[10px] text-neutral-500 uppercase tracking-wider block">
                     Resumen: {nights} {nights === 1 ? 'noche' : 'noches'} × S/
                     {currentRoom.pricePerNightPen}
+                  </span>
+                  <span className="text-[11px] text-[#9e7d38] font-semibold uppercase tracking-wider block mb-1">
+                    Desayuno incluido
                   </span>
                   <span className="text-xl sm:text-2xl font-serif text-[#141312] font-semibold">
                     Total estimado: S/ {totalPrice}
@@ -297,7 +300,7 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                 type="submit"
                 className="w-full bg-[#141312] hover:bg-[#C5A059] text-white hover:text-[#141312] py-4 text-xs font-semibold uppercase tracking-[0.25em] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-lg active:scale-98"
               >
-                <span>Enviar solicitud por WhatsApp</span>
+                <span>Abrir WhatsApp para enviar solicitud</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>

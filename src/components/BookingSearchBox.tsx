@@ -41,7 +41,7 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
 
   return (
     <div className="relative z-20 max-w-6xl mx-auto px-6 -mt-16 sm:-mt-20">
-      <div className="bg-white border border-[#E4DCD0] shadow-2xl p-6 sm:p-8 lg:p-9">
+      <div className="bg-white border border-[#E4DCD0] shadow-2xl p-6 sm:p-8 lg:p-9 rounded-xl">
         {/* Top Header Information */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-5 pb-4 border-b border-[#E4DCD0]/70">
           <div className="flex items-center gap-2">
@@ -60,8 +60,8 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-5 items-end">
           {/* Check In Field */}
           <div>
-            <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-[0.22em] mb-2">
-              Llegada (Check-in)
+            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+              Llegada
             </label>
             <div className="relative">
               <input
@@ -69,7 +69,7 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
                 value={checkIn}
                 min={formatLocalDate(today)}
                 onChange={(e) => handleCheckInChange(e.target.value)}
-                className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] px-4 py-3 text-xs tracking-wider text-[#141312] outline-none transition cursor-pointer"
+                className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3.5 text-sm text-[#141312] outline-none transition cursor-pointer"
                 required
               />
             </div>
@@ -77,8 +77,8 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
 
           {/* Check Out Field */}
           <div>
-            <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-[0.22em] mb-2">
-              Salida (Check-out)
+            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+              Salida
             </label>
             <div className="relative">
               <input
@@ -89,7 +89,7 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
                   setCheckOut(e.target.value);
                   setDateError('');
                 }}
-                className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] px-4 py-3 text-xs tracking-wider text-[#141312] outline-none transition cursor-pointer"
+                className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3.5 text-sm text-[#141312] outline-none transition cursor-pointer"
                 required
               />
             </div>
@@ -97,13 +97,13 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
 
           {/* Room Selection */}
           <div>
-            <label className="block text-[11px] font-medium text-neutral-600 uppercase tracking-[0.22em] mb-2">
-              Categoría de Suite
+            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+              Habitación
             </label>
             <select
               value={suiteId}
               onChange={(e) => setSuiteId(e.target.value)}
-              className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] px-4 py-3 text-xs text-neutral-800 outline-none transition cursor-pointer"
+              className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3.5 text-sm text-neutral-800 outline-none transition cursor-pointer"
             >
               {hotelRooms.map((room) => (
                 <option key={room.id} value={room.id}>
@@ -119,7 +119,7 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
               type="submit"
               className="w-full bg-[#141312] hover:bg-[#1E1D1B] text-[#C5A059] border border-[#C5A059]/50 hover:border-[#C5A059] font-medium text-xs uppercase tracking-[0.25em] px-6 py-3.5 transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer active:scale-98 shadow-md"
             >
-              <span>Consultar Fechas</span>
+              <span>Ver Disponibilidad</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </div>
