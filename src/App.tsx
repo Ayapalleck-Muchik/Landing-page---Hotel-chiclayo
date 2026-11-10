@@ -17,6 +17,7 @@ import { Room } from './types';
 export default function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isBreakfastModalOpen, setIsBreakfastModalOpen] = useState(false);
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [bookingParams, setBookingParams] = useState<{
     suiteId?: string;
     checkIn?: string;
@@ -48,7 +49,10 @@ export default function App() {
       {/* Main Content Sections */}
       <main className="flex-1">
         {/* 03. Hero Section con Copywriting Persuasivo Urbano */}
-        <HeroSection onOpenBooking={() => handleOpenBooking()} />
+        <HeroSection
+          onOpenBooking={() => handleOpenBooking()}
+          onOpenPapalAnnouncement={() => setIsWelcomeModalOpen(true)}
+        />
 
         {/* 04. Barra de Disponibilidad Acoplada */}
         <BookingSearchBox onSearch={handleSearchDates} />
@@ -76,7 +80,11 @@ export default function App() {
       <WhatsAppButton />
 
       {/* Modals Interactivos */}
-      <WelcomeModal onCheckAvailability={() => handleOpenBooking()} />
+      <WelcomeModal
+        isOpen={isWelcomeModalOpen}
+        onClose={() => setIsWelcomeModalOpen(false)}
+        onCheckAvailability={() => handleOpenBooking()}
+      />
 
       <BookingModal
         isOpen={isBookingModalOpen}

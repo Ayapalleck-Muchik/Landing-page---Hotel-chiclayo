@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, ShieldCheck, Footprints, ExternalLink, Church } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck, Footprints } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 
 export const LocationContactSection: React.FC = () => {
@@ -8,55 +8,30 @@ export const LocationContactSection: React.FC = () => {
     <section className="py-24 bg-white border-t border-[#E4DCD0]" id="ubicacion">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          {/* Text Details & Security Guarantee */}
           <div className="lg:col-span-6" id="contacto">
-            <span className="text-[#C5A059] font-semibold tracking-[0.35em] uppercase text-[11px] block mb-2">
-              Ubicación
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif text-[#141312] font-light mb-6">
-              En el centro de Chiclayo
+            <h2 className="mb-6 font-serif text-[clamp(2.25rem,4.5vw,4.5rem)] font-normal leading-[1.04] tracking-[-0.025em] text-[#141312]">
+              Chiclayo, a solo unos pasos
             </h2>
-
-            {/* MANDATORY REAL COPY: UBICACIÓN Y SEGURIDAD PREMIUM */}
-            <div className="bg-[#FAF8F5] border-l-2 border-[#C5A059] p-5 mb-6">
-              <div className="flex items-center gap-2 mb-2 text-[#C5A059]">
-                <ShieldCheck className="w-4 h-4" />
-                <span className="text-[11px] uppercase font-semibold tracking-[0.2em] text-[#141312]">
-                  Frente a la comisaría
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-neutral-800 leading-relaxed font-light">
-                Estamos ubicados en el centro de Chiclayo, justo frente a la comisaría.
+            <p className="mb-5 max-w-2xl text-lg font-normal leading-relaxed text-[#3B3935] sm:text-xl">
+              Una ubicación que te acerca a todo lo que quieres descubrir.
+            </p>
+            <p className="mb-7 max-w-2xl text-base font-normal leading-relaxed text-neutral-700 sm:text-lg">
+              A solo dos cuadras de la Plaza de Armas, el Hotel Ayapalleck Muchik te permite
+              disfrutar del centro de Chiclayo con comodidad. Camina hacia la Catedral, descubre
+              restaurantes y comercios locales, o simplemente disfruta de la ciudad a tu ritmo.
+            </p>
+            <div className="mb-7 flex items-start gap-3 border-y border-[#E4DCD0] py-5 text-neutral-700">
+              <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#C5A059]" aria-hidden="true" />
+              <p className="text-sm font-normal leading-relaxed sm:text-base">
+                Nuestra ubicación frente a una comisaría y la atención cercana de nuestro equipo
+                hacen que regresar al hotel al final del día sea parte de una estadía agradable.
               </p>
             </div>
+            <p className="mb-8 flex items-center gap-3 font-serif text-xl leading-relaxed text-[#141312] sm:text-2xl">
+              <Footprints className="h-5 w-5 shrink-0 text-[#C5A059]" aria-hidden="true" />
+              Descubre Chiclayo. Nosotros te esperamos para descansar.
+            </p>
 
-            {/* MANDATORY REAL COPY: TU PUNTO DE PARTIDA PERFECTO */}
-            <div className="bg-[#FAF8F5] border-l-2 border-neutral-800 p-5 mb-8">
-              <div className="flex items-center gap-2 mb-2 text-neutral-800">
-                <Footprints className="w-4 h-4 text-[#C5A059]" />
-                <span className="text-[11px] uppercase font-semibold tracking-[0.2em] text-[#141312]">
-                  Una ubicación para organizar tu día
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-neutral-800 leading-relaxed font-light">
-                Desde aquí puedes organizar tus recorridos por la ciudad y volver a descansar al final del día.
-              </p>
-            </div>
-
-            {/* Pope's Historic Route Highlight */}
-            <div className="flex items-start gap-3 text-xs text-neutral-700 mb-8 p-4 bg-[#141312] text-white">
-              <Church className="w-5 h-5 text-[#DFCA9D] shrink-0 mt-0.5" />
-              <div>
-                <strong className="text-[#DFCA9D] block mb-1 uppercase tracking-wider font-semibold">
-                  Visita Papal en Chiclayo
-                </strong>
-                <p className="font-light text-neutral-300">
-                  Consulta al hotel la información actualizada sobre rutas y actividades relacionadas con la visita.
-                </p>
-              </div>
-            </div>
-
-            {/* Contact details */}
             <div className="space-y-4 text-xs text-neutral-700 mb-8 border-l border-[#C5A059]/40 pl-5">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-500 block mb-1">

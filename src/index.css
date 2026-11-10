@@ -40,6 +40,11 @@
   p, span, a, li, input, select, textarea {
     font-family: var(--font-sans);
   }
+
+  :focus-visible {
+    outline: 2px solid var(--color-moche-gold);
+    outline-offset: 3px;
+  }
 }
 
 .hero-mask {
@@ -48,4 +53,10 @@
 
 .text-balance {
   text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }

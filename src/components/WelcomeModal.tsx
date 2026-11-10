@@ -1,87 +1,78 @@
-import React, { useState, useEffect } from 'react';
-import { X, ArrowRight, Sparkles } from 'lucide-react';
+import React from 'react';
+import { X, Sparkles } from 'lucide-react';
 
 interface WelcomeModalProps {
+  isOpen: boolean;
+  onClose: () => void;
   onCheckAvailability: () => void;
 }
 
-export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onCheckAvailability }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    // Show modal 2 seconds after page load as requested
-    const timer = setTimeout(() => {
-      setIsOpen(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
+export const WelcomeModal: React.FC<WelcomeModalProps> = ({
+  isOpen,
+  onClose,
+  onCheckAvailability,
+}) => {
   if (!isOpen) return null;
 
   const handleAction = () => {
-    setIsOpen(false);
+    onClose();
     onCheckAvailability();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/70 backdrop-blur-sm animate-in fade-in duration-300">
-      <div className="relative w-full max-w-4xl bg-neutral-50 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-[#C5A059]/30 grid grid-cols-1 md:grid-cols-2">
-        {/* Discrete Close Button (X) */}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="papal-announcement-title"
+    >
+      <div className="relative grid w-full max-w-4xl grid-cols-1 overflow-hidden rounded-2xl border border-[#C5A059]/30 bg-neutral-50 shadow-2xl sm:rounded-3xl md:grid-cols-2">
         <button
-          onClick={() => setIsOpen(false)}
+          onClick={onClose}
           type="button"
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-neutral-700 hover:text-neutral-900 flex items-center justify-center transition-all shadow-md cursor-pointer border border-neutral-200"
+          className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 bg-white/80 text-neutral-700 shadow-md transition-colors hover:bg-white hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A059]"
           aria-label="Cerrar ventana"
         >
-          <X className="w-5 h-5" />
+          <X className="h-5 w-5" />
         </button>
 
-        {/* Left Column: Image with object-fit: cover */}
-        <div className="relative min-h-[220px] sm:min-h-[300px] md:min-h-[460px] bg-neutral-900 overflow-hidden">
+        <div className="relative min-h-[220px] overflow-hidden bg-neutral-900 sm:min-h-[300px] md:min-h-[460px]">
           <img
             src="/images-hotel/elpapa-chiclayo.jpg"
             alt="Histórica Visita Papal en Chiclayo"
-            className="w-full h-full object-cover object-[18%_center] md:object-[15%_center]"
+            className="h-full w-full object-cover object-[18%_center] md:object-[15%_center]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:hidden" />
-          <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-[#141312]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#C5A059]/30 text-white text-[11px] tracking-wider uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+          <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full border border-[#C5A059]/30 bg-[#141312]/80 px-3.5 py-1.5 text-[11px] uppercase tracking-wider text-white backdrop-blur-md">
+            <Sparkles className="h-3.5 w-3.5 text-[#C5A059]" />
             <span>Chiclayo • Enclave Histórico</span>
           </div>
         </div>
 
-        {/* Right Column: Content */}
-        <div className="p-6 sm:p-10 md:p-12 flex flex-col justify-between bg-neutral-50">
+        <div className="flex flex-col justify-between bg-neutral-50 p-6 sm:p-10 md:p-12">
           <div>
-            {/* Small Gold Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#CBA153]/15 text-[#9e7d38] border border-[#CBA153]/40 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-[0.2em] uppercase mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#CBA153]" />
-              <span>EVENTO HISTÓRICO</span>
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#CBA153]/40 bg-[#CBA153]/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9e7d38] sm:text-[11px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#CBA153]" />
+              <span>Evento histórico</span>
             </div>
-
-            {/* Large Serif Title */}
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-neutral-900 font-light tracking-wide leading-tight mb-4">
+            <h2 id="papal-announcement-title" className="mb-4 font-serif text-2xl font-light leading-tight tracking-wide text-neutral-900 sm:text-3xl lg:text-4xl">
               Vive la Visita Papal desde el Corazón de Chiclayo
             </h2>
-
-            {/* Sans-serif Paragraph */}
-            <p className="text-neutral-600 text-xs sm:text-sm lg:text-base font-sans font-light leading-relaxed mb-6">
+            <p className="mb-6 text-xs font-light leading-relaxed text-neutral-600 sm:text-sm lg:text-base">
               Asegura tu comodidad a pasos de la ruta principal del Papa León XIV. Habitaciones
               limitadas para esta temporada.
             </p>
           </div>
 
-          {/* Large Gold Call To Action Button */}
           <div className="pt-2">
             <button
               onClick={handleAction}
               type="button"
-              className="w-full inline-flex items-center justify-center gap-3 bg-[#CBA153] hover:bg-[#b88e40] text-neutral-900 hover:text-black py-4 px-6 rounded-xl font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-98 cursor-pointer"
+              className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-[#CBA153] px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-900 shadow-lg transition-colors duration-300 hover:bg-[#b88e40] hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9e7d38] focus-visible:ring-offset-2 sm:text-sm"
             >
-              <span>Ver Disponibilidad →</span>
+              Ver disponibilidad
             </button>
-            <p className="text-center text-[10px] text-neutral-400 mt-3 font-light">
+            <p className="mt-3 text-center text-[10px] font-light text-neutral-400">
               Cancelación flexible y reserva directa sin comisiones ocultas
             </p>
           </div>
