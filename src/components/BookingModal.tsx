@@ -65,6 +65,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   }, [isOpen, initialRoomId, initialCheckIn, initialCheckOut]);
 
   useEffect(() => {
+    if (!isOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
     if (!cooldownUntil) return;
 
     const updateCooldown = () => {
