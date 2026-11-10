@@ -11,8 +11,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenBooking }) => {
       {/* Background Image Container */}
       <div className="absolute inset-0 w-full h-full bg-[#141312]">
         <img
-          src="https://lh3.googleusercontent.com/aida/AEtjO1UNtPdpmfEw-AJSsmUBqG9HbRadTA9DmZ8EQwxGzL_VusfzRYnQklGNCa2bISNzM7fxbMXYZ84Np9khspJjdtgIpbCkFIdWZyDumDVZekZ2vyvemuUdDogW00ghs1psBilVrgjiMNRaD-y0ahNbRJTRCm43yTfDOQCsG4qeXCB9lik3we9rdEWmYb1IMBAZWHWzS9ec9fI1Hl-p7n-gj9MlEB1bmnKkVoz4eL1Yx-5DMqErXwvqskitZoA"
-          alt="Habitaciones modernas en Hotel Ayapalleck Muchik Chiclayo"
+          src="/images-hotel/fachada.jpg"
+          alt="Fachada del Hotel Ayapalleck Muchik en Chiclayo"
           className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000 ease-out"
           referrerPolicy="no-referrer"
         />

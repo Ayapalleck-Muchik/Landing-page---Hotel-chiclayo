@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { hotelRooms } from '../data/roomsData';
+import { addLocalDays, formatLocalDate, isValidStay, minimumCheckOutDate } from '../utils/bookingDates';
 
 interface BookingSearchBoxProps {
   onSearch: (params: {
@@ -11,21 +12,30 @@ interface BookingSearchBoxProps {
 }
 
 export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) => {
-  // Set default dates (today + 1 and today + 3)
+  // Set default dates using the visitor's local calendar day.
   const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
-  const nextDay = new Date(today);
-  nextDay.setDate(today.getDate() + 3);
+  const tomorrow = addLocalDays(today, 1);
+  const nextDay = addLocalDays(today, 3);
 
-  const formatDate = (d: Date) => d.toISOString().split('T')[0];
-
-  const [checkIn, setCheckIn] = useState(formatDate(tomorrow));
-  const [checkOut, setCheckOut] = useState(formatDate(nextDay));
+  const [checkIn, setCheckIn] = useState(formatLocalDate(tomorrow));
+  const [checkOut, setCheckOut] = useState(formatLocalDate(nextDay));
   const [suiteId, setSuiteId] = useState(hotelRooms[0].id);
+  const [dateError, setDateError] = useState('');
+
+  const handleCheckInChange = (value: string) => {
+    setCheckIn(value);
+    const earliestCheckOut = minimumCheckOutDate(value);
+    if (checkOut < earliestCheckOut) setCheckOut(earliestCheckOut);
+    setDateError('');
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isValidStay(checkIn, checkOut)) {
+      setDateError('Selecciona una salida posterior a la llegada.');
+      return;
+    }
+    setDateError('');
     onSearch({ checkIn, checkOut, suiteId });
   };
 
@@ -57,8 +67,8 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
               <input
                 type="date"
                 value={checkIn}
-                min={formatDate(today)}
-                onChange={(e) => setCheckIn(e.target.value)}
+                min={formatLocalDate(today)}
+                onChange={(e) => handleCheckInChange(e.target.value)}
                 className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] px-4 py-3 text-xs tracking-wider text-[#141312] outline-none transition cursor-pointer"
                 required
               />
@@ -74,8 +84,11 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
               <input
                 type="date"
                 value={checkOut}
-                min={checkIn || formatDate(tomorrow)}
-                onChange={(e) => setCheckOut(e.target.value)}
+                min={minimumCheckOutDate(checkIn)}
+                onChange={(e) => {
+                  setCheckOut(e.target.value);
+                  setDateError('');
+                }}
                 className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059] px-4 py-3 text-xs tracking-wider text-[#141312] outline-none transition cursor-pointer"
                 required
               />
@@ -111,6 +124,11 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
             </button>
           </div>
         </form>
+        {dateError && (
+          <p className="mt-3 text-xs text-red-700" role="alert">
+            {dateError}
+          </p>
+        )}
       </div>
     </div>
   );

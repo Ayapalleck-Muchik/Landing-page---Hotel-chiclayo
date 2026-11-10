@@ -121,8 +121,7 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSelectFor
                   Tarifa por noche
                 </span>
                 <span className="text-2xl font-serif text-[#141312]">
-                  ${room.pricePerNightUsd}{' '}
-                  <span className="text-xs font-sans font-light text-neutral-500">USD</span>
+                  S/ {room.pricePerNightPen}
                 </span>
               </div>
 
