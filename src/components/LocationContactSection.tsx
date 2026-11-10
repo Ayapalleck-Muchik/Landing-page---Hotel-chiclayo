@@ -109,8 +109,8 @@ export const LocationContactSection: React.FC = () => {
           <div className="lg:col-span-6 border border-[#E4DCD0] p-2 bg-[#FAF8F5]">
             <div className="relative h-96 sm:h-[460px] overflow-hidden">
               <img
-                src="https://lh3.googleusercontent.com/aida/AEtjO1XlHz84cwQUAuzBs1mvk9dGcp-FwwsaRY6vbeCr-RCV4gvfREOt7Ya8MrMX2pintcq-6x3TPWB0MGA1CW3NnT-REp28jkXuCcDxN_sqvEV2FxgviP_RRTgrVUfFrpNoq535OXqwqZh7p3o6Kf2-gwkrWQZWzg7WAG8nzPBrAL1gXj4mTJc3gGxeUUs0ENTlZ-BPuh34yLD8LhBbAnZekQquWdo72ynt_M7UenHwRjJ6Y6wYM4gy7orsA5FG"
-                alt="Fachada e interiores del Hotel Ayapalleck Muchik Chiclayo"
+                src="/images-hotel/recepcion.jpg"
+                alt="Recepción del Hotel Ayapalleck Muchik Chiclayo"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />

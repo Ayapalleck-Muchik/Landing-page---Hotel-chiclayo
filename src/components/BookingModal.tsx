@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { X, Calendar, User, Phone, Check, ArrowRight, ShieldCheck } from 'lucide-react';
 import { Room } from '../types';
 import { hotelRooms } from '../data/roomsData';
+import {
+  addLocalDays,
+  calculateNights,
+  formatLocalDate,
+  isValidStay,
+  minimumCheckOutDate,
+} from '../utils/bookingDates';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -19,54 +26,74 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   initialCheckOut,
 }) => {
   const today = new Date();
-  const tomorrow = new Date(today);
-  tomorrow.setDate(today.getDate() + 1);
-  const nextDay = new Date(today);
-  nextDay.setDate(today.getDate() + 3);
-
-  const formatDate = (d: Date) => d.toISOString().split('T')[0];
+  const tomorrow = addLocalDays(today, 1);
+  const nextDay = addLocalDays(today, 3);
 
   const [selectedRoomId, setSelectedRoomId] = useState<string>(
     initialRoomId || hotelRooms[0].id
   );
-  const [checkIn, setCheckIn] = useState<string>(initialCheckIn || formatDate(tomorrow));
-  const [checkOut, setCheckOut] = useState<string>(initialCheckOut || formatDate(nextDay));
+  const [checkIn, setCheckIn] = useState<string>(initialCheckIn || formatLocalDate(tomorrow));
+  const [checkOut, setCheckOut] = useState<string>(initialCheckOut || formatLocalDate(nextDay));
   const [guests, setGuests] = useState<number>(2);
   const [guestName, setGuestName] = useState<string>('');
   const [guestPhone, setGuestPhone] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [dateError, setDateError] = useState('');
 
   useEffect(() => {
-    if (initialRoomId) setSelectedRoomId(initialRoomId);
-    if (initialCheckIn) setCheckIn(initialCheckIn);
-    if (initialCheckOut) setCheckOut(initialCheckOut);
-  }, [initialRoomId, initialCheckIn, initialCheckOut]);
+    if (!isOpen) return;
+
+    const todayValue = formatLocalDate(new Date());
+    const defaultCheckIn = formatLocalDate(addLocalDays(new Date(), 1));
+    const nextCheckIn = initialCheckIn && initialCheckIn >= todayValue ? initialCheckIn : defaultCheckIn;
+    const defaultCheckOut = minimumCheckOutDate(nextCheckIn);
+    const nextCheckOut = initialCheckOut && calculateNights(nextCheckIn, initialCheckOut) > 0
+      ? initialCheckOut
+      : defaultCheckOut;
+
+    setSelectedRoomId(initialRoomId || hotelRooms[0].id);
+    setCheckIn(nextCheckIn);
+    setCheckOut(nextCheckOut);
+    setSubmitted(false);
+    setDateError('');
+  }, [isOpen, initialRoomId, initialCheckIn, initialCheckOut]);
 
   if (!isOpen) return null;
 
   const currentRoom = hotelRooms.find((r) => r.id === selectedRoomId) || hotelRooms[0];
 
-  // Calculate nights
-  const d1 = new Date(checkIn);
-  const d2 = new Date(checkOut);
-  const diffTime = Math.max(0, d2.getTime() - d1.getTime());
-  const nights = Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24)));
-  const totalPrice = nights * currentRoom.pricePerNightUsd;
+  const nights = calculateNights(checkIn, checkOut);
+  const totalPrice = nights * currentRoom.pricePerNightPen;
+
+  const handleCheckInChange = (value: string) => {
+    setCheckIn(value);
+    const earliestCheckOut = minimumCheckOutDate(value);
+    if (checkOut < earliestCheckOut) setCheckOut(earliestCheckOut);
+    setDateError('');
+  };
 
   const handleConfirmReservation = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isValidStay(checkIn, checkOut)) {
+      setDateError('La fecha de salida debe ser posterior a la fecha de llegada.');
+      return;
+    }
+
+    setDateError('');
     setSubmitted(true);
 
-    const message = `Hola Hotel Ayapalleck Muchik, deseo confirmar mi reserva desde la página web:
-- Suite: ${currentRoom.title} (${currentRoom.refCode})
+    const message = `Hola Hotel Ayapalleck Muchik, deseo solicitar disponibilidad y una reserva desde la página web:
+- Habitación: ${currentRoom.title} (${currentRoom.refCode})
 - Llegada: ${checkIn}
 - Salida: ${checkOut} (${nights} noches)
 - Huéspedes: ${guests}
 - Titular: ${guestName || 'Por definir'}
 - Teléfono: ${guestPhone || 'No especificado'}
 ${notes ? `- Requerimientos: ${notes}` : ''}
-- Total estimado: $${totalPrice} USD`;
+- Desayuno incluido
+- Total estimado: S/ ${totalPrice}
+- Solicitud pendiente de confirmación por el hotel.`;
 
     const encoded = encodeURIComponent(message);
     const waUrl = `https://wa.me/51999999999?text=${encoded}`;
@@ -106,12 +133,12 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                 <Check className="w-8 h-8" />
               </div>
               <h4 className="text-2xl font-serif text-[#141312]">
-                ¡Solicitud Generada con Éxito!
+                Solicitud enviada por WhatsApp
               </h4>
               <p className="text-xs sm:text-sm text-neutral-600 max-w-md mx-auto leading-relaxed">
-                Se ha generado tu requerimiento para la <strong>{currentRoom.title}</strong> por{' '}
-                {nights} noches (${totalPrice} USD). Si la ventana de WhatsApp no se abrió
-                automáticamente, puedes presionar el botón inferior.
+                Tu solicitud para <strong>{currentRoom.title}</strong> por {nights} noches (S/ {totalPrice})
+                está pendiente de confirmación por el hotel. El desayuno está incluido. Si la ventana de
+                WhatsApp no se abrió automáticamente, puedes presionar el botón inferior.
               </p>
 
               <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
@@ -145,7 +172,7 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                 >
                   {hotelRooms.map((room) => (
                     <option key={room.id} value={room.id}>
-                      {room.title} — ${room.pricePerNightUsd} USD / noche ({room.refCode})
+                      {room.title} — S/ {room.pricePerNightPen} / noche ({room.refCode})
                     </option>
                   ))}
                 </select>
@@ -160,7 +187,8 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                   <input
                     type="date"
                     value={checkIn}
-                    onChange={(e) => setCheckIn(e.target.value)}
+                    min={formatLocalDate(today)}
+                    onChange={(e) => handleCheckInChange(e.target.value)}
                     className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] px-3 py-2.5 text-xs text-neutral-800 outline-none"
                     required
                   />
@@ -172,8 +200,11 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                   <input
                     type="date"
                     value={checkOut}
-                    min={checkIn}
-                    onChange={(e) => setCheckOut(e.target.value)}
+                    min={minimumCheckOutDate(checkIn)}
+                    onChange={(e) => {
+                      setCheckOut(e.target.value);
+                      setDateError('');
+                    }}
                     className="w-full bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] px-3 py-2.5 text-xs text-neutral-800 outline-none"
                     required
                   />
@@ -194,6 +225,12 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                   </select>
                 </div>
               </div>
+
+              {dateError && (
+                <p className="text-xs text-red-700" role="alert">
+                  {dateError}
+                </p>
+              )}
 
               {/* Client Info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -242,15 +279,15 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
               <div className="bg-[#FAF8F5] border border-[#E4DCD0] p-4 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-neutral-500 uppercase tracking-wider block">
-                    Resumen: {nights} {nights === 1 ? 'noche' : 'noches'} × $
-                    {currentRoom.pricePerNightUsd} USD
+                    Resumen: {nights} {nights === 1 ? 'noche' : 'noches'} × S/
+                    {currentRoom.pricePerNightPen}
                   </span>
                   <span className="text-xl sm:text-2xl font-serif text-[#141312] font-semibold">
-                    Total Estimado: ${totalPrice} USD
+                    Total estimado: S/ {totalPrice}
                   </span>
                 </div>
                 <div className="text-right hidden sm:block">
-                  <span className="text-[10px] text-neutral-500 block">Sin cobro por adelantado</span>
+                  <span className="text-[10px] text-neutral-500 block">Desayuno incluido</span>
                   <span className="text-[11px] text-[#C5A059] font-medium">Tarifa directa oficial</span>
                 </div>
               </div>
@@ -260,7 +297,7 @@ ${notes ? `- Requerimientos: ${notes}` : ''}
                 type="submit"
                 className="w-full bg-[#141312] hover:bg-[#C5A059] text-white hover:text-[#141312] py-4 text-xs font-semibold uppercase tracking-[0.25em] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer shadow-lg active:scale-98"
               >
-                <span>Confirmar y Enviar por WhatsApp</span>
+                <span>Enviar solicitud por WhatsApp</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>

@@ -6,11 +6,11 @@ export interface Room {
   id: string;
   refCode: string;
   title: string;
-  category: 'master' | 'executive' | 'standard';
+  category: 'king' | 'matrimonial' | 'doble';
   categoryLabel: string;
   tagline: string;
   description: string;
-  pricePerNightUsd: number;
+  pricePerNightPen: number;
   surfaceM2: number;
   bedType: string;
   badge?: string;

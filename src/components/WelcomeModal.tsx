@@ -7,7 +7,6 @@ interface WelcomeModalProps {
 
 export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onCheckAvailability }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [imgSrc, setImgSrc] = useState('/papa-visita.jpg');
 
   useEffect(() => {
     // Show modal 2 seconds after page load as requested
@@ -38,16 +37,10 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({ onCheckAvailability 
           <X className="w-5 h-5" />
         </button>
 
-        {/* Left Column: Image with object-fit: cover and src="/papa-visita.jpg" */}
+        {/* Left Column: Image with object-fit: cover */}
         <div className="relative min-h-[220px] sm:min-h-[300px] md:min-h-[460px] bg-neutral-900 overflow-hidden">
           <img
-            src={imgSrc}
-            onError={() => {
-              // Elegant fallback in case the local asset is yet to be placed in /public
-              setImgSrc(
-                'https://images.unsplash.com/photo-1548625361-1250325d7ef8?q=80&w=1200&auto=format&fit=crop'
-              );
-            }}
+            src="/images-hotel/elpapa-chiclayo.jpg"
             alt="Histórica Visita Papal en Chiclayo"
             className="w-full h-full object-cover"
           />

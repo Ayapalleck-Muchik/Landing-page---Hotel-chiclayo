@@ -37,7 +37,7 @@ export const BreakfastSection: React.FC<BreakfastSectionProps> = ({ onOpenBookin
           <div className="lg:col-span-6 relative">
             <div className="border border-[#E4DCD0] p-2 bg-[#FAF8F5] shadow-lg">
               <img
-                src="https://lh3.googleusercontent.com/aida/AEtjO1UNtPdpmfEw-AJSsmUBqG9HbRadTA9DmZ8EQwxGzL_VusfzRYnQklGNCa2bISNzM7fxbMXYZ84Np9khspJjdtgIpbCkFIdWZyDumDVZekZ2vyvemuUdDogW00ghs1psBilVrgjiMNRaD-y0ahNbRJTRCm43yTfDOQCsG4qeXCB9lik3we9rdEWmYb1IMBAZWHWzS9ec9fI1Hl-p7n-gj9MlEB1bmnKkVoz4eL1Yx-5DMqErXwvqskitZoA"
+                src="/images-hotel/desayuno.jpg"
                 alt="Desayuno de cortesía en Hotel Ayapalleck Muchik"
                 className="w-full h-80 sm:h-96 object-cover"
                 referrerPolicy="no-referrer"
