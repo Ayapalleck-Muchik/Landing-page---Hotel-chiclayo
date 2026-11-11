@@ -13,15 +13,30 @@
   --color-moche-linen: #EDE6DC;
   --color-moche-border: #E4DCD0;
 
-  /* Typography: Cormorant Garamond (Editorial Titles) & Jost (Body/Menus) */
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Jost", system-ui, -apple-system, sans-serif;
+  /* Default used only while comparing the three approved type directions. */
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
 
   --letter-spacing-wide: 0.025em;
   --letter-spacing-wider: 0.05em;
   --letter-spacing-widest: 0.1em;
   --letter-spacing-super-wide: 0.25em;
   --letter-spacing-monumental: 0.35em;
+}
+
+:root[data-typeface="fraunces"] {
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+}
+
+:root[data-typeface="playfair"] {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Jost", system-ui, -apple-system, sans-serif;
+}
+
+:root[data-typeface="dm-serif"] {
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
 }
 
 @layer base {
