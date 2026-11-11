@@ -65,12 +65,13 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch, on
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-5 items-end">
           {/* Check In Field */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+            <label htmlFor="search-check-in" className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
               Llegada
             </label>
             <div className="relative">
               <input
                 type="date"
+                id="search-check-in"
                 value={checkIn}
                 min={formatLocalDate(today)}
                 onChange={(e) => handleCheckInChange(e.target.value)}
@@ -82,12 +83,13 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch, on
 
           {/* Check Out Field */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+            <label htmlFor="search-check-out" className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
               Salida
             </label>
             <div className="relative">
               <input
                 type="date"
+                id="search-check-out"
                 value={checkOut}
                 min={minimumCheckOutDate(checkIn)}
                 onChange={(e) => {
@@ -102,10 +104,11 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch, on
 
           {/* Room Selection */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+            <label htmlFor="search-room" className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
               Habitación
             </label>
             <select
+              id="search-room"
               value={suiteId}
               onChange={(e) => setSuiteId(e.target.value)}
               className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3.5 text-sm text-neutral-800 outline-none transition cursor-pointer"

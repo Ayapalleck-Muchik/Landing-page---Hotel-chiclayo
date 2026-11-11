@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coffee, Croissant, Apple, Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 
 interface BreakfastSectionProps {
@@ -8,29 +8,6 @@ interface BreakfastSectionProps {
 
 export const BreakfastSection: React.FC<BreakfastSectionProps> = ({ onOpenBooking }) => {
   const reduceMotion = useReducedMotion();
-  const breakfastItems = [
-    {
-      title: 'Desayuno incluido',
-      desc: 'Un momento para empezar el día con calma.',
-      icon: Croissant,
-    },
-    {
-      title: 'A tu ritmo',
-      desc: 'Consulta los detalles del servicio durante tu estadía.',
-      icon: Coffee,
-    },
-    {
-      title: 'Antes de salir',
-      desc: 'Una pausa sencilla antes de recorrer Chiclayo.',
-      icon: Apple,
-    },
-    {
-      title: 'Tu mañana',
-      desc: 'El hotel puede orientarte sobre el servicio del día.',
-      icon: Sparkles,
-    },
-  ];
-
   return (
     <section className="py-24 bg-white border-b border-[#E4DCD0]" id="desayuno">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -38,20 +15,24 @@ export const BreakfastSection: React.FC<BreakfastSectionProps> = ({ onOpenBookin
           {/* Photo & Badge */}
           <div className="lg:col-span-6 relative">
             <div className="border border-[#E4DCD0] p-2 bg-[#FAF8F5] shadow-lg">
-              <motion.img
-                src="/images-hotel/desayuno.jpg"
-                alt="Desayuno de cortesía en Hotel Ayapalleck Muchik"
-                className="w-full h-80 sm:h-96 object-cover"
-                referrerPolicy="no-referrer"
-                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
+              <motion.div
+                className="h-80 overflow-hidden sm:h-96"
+                initial={reduceMotion ? false : { clipPath: 'inset(0 0 14% 0)', opacity: 0.65 }}
+                whileInView={{ clipPath: 'inset(0 0 0% 0)', opacity: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.65, ease: 'easeOut' }}
-              />
+              >
+                <img
+                  src="/images-hotel/desayuno.jpg"
+                  alt="Desayuno incluido en Hotel Ayapalleck Muchik"
+                  className="h-full w-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+              </motion.div>
             </div>
             <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-6 sm:-right-6 bg-[#141312] text-white p-5 border border-[#C5A059]/40 max-w-xs shadow-2xl">
               <span className="text-[10px] font-semibold text-[#DFCA9D] uppercase tracking-[0.25em] block mb-1">
-                Desayuno incluido
+                Incluido en tu estadía
               </span>
               <p className="text-xs text-neutral-300 font-light leading-relaxed">
                 El desayuno está incluido con tu estadía. Consulta los detalles directamente con el hotel.
@@ -59,7 +40,7 @@ export const BreakfastSection: React.FC<BreakfastSectionProps> = ({ onOpenBookin
             </div>
           </div>
 
-          {/* Copy and Pillars */}
+          {/* Copy */}
           <div className="lg:col-span-6">
             <span className="text-[#C5A059] font-semibold tracking-[0.35em] uppercase text-[11px] block mb-2">
               Las mañanas empiezan aquí
@@ -68,31 +49,9 @@ export const BreakfastSection: React.FC<BreakfastSectionProps> = ({ onOpenBookin
               Desayuno incluido con tu estadía
             </h2>
             <p className="text-neutral-700 text-sm sm:text-base font-light leading-relaxed mb-8">
-              Empieza el día con una pausa antes de salir a conocer Chiclayo. Para detalles del servicio,
-              el equipo del hotel podrá orientarte durante tu visita.
+              Una pausa incluida antes de salir a conocer Chiclayo. Para conocer los detalles del
+              servicio durante tu visita, el equipo del hotel podrá orientarte directamente.
             </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              {breakfastItems.map((item, idx) => {
-                const IconComponent = item.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="p-4 bg-[#FAF8F5] border border-[#E4DCD0] flex items-start gap-3"
-                  >
-                    <IconComponent className="w-5 h-5 text-[#C5A059] shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-[#141312] mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-xs text-neutral-600 font-light leading-snug">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
 
             <button
               onClick={onOpenBooking}

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { X, Sparkles } from 'lucide-react';
+import { useModalFocus } from '../utils/useModalFocus';
 
 interface WelcomeModalProps {
   isOpen: boolean;
@@ -12,6 +13,11 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
   onClose,
   onCheckAvailability,
 }) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useModalFocus(isOpen, onClose, dialogRef, closeButtonRef);
+
   if (!isOpen) return null;
 
   const handleAction = () => {
@@ -21,6 +27,8 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
 
   return (
     <div
+      ref={dialogRef}
+      tabIndex={-1}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm sm:p-6"
       role="dialog"
       aria-modal="true"
@@ -28,6 +36,7 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
     >
       <div className="relative grid w-full max-w-4xl grid-cols-1 overflow-hidden rounded-2xl border border-[#C5A059]/30 bg-neutral-50 shadow-2xl sm:rounded-3xl md:grid-cols-2">
         <button
+          ref={closeButtonRef}
           onClick={onClose}
           type="button"
           className="absolute right-4 top-4 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-neutral-200 bg-white/80 text-neutral-700 shadow-md transition-colors hover:bg-white hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C5A059]"
@@ -59,8 +68,7 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
               Vive la Visita Papal desde el Corazón de Chiclayo
             </h2>
             <p className="mb-6 text-xs font-light leading-relaxed text-neutral-600 sm:text-sm lg:text-base">
-              Asegura tu comodidad a pasos de la ruta principal del Papa León XIV. Habitaciones
-              limitadas para esta temporada.
+              Consulta disponibilidad para tu visita y descansa a pasos de la ruta principal del Papa León XIV.
             </p>
           </div>
 
@@ -73,7 +81,7 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
               Ver disponibilidad
             </button>
             <p className="mt-3 text-center text-[10px] font-light text-neutral-400">
-              Cancelación flexible y reserva directa sin comisiones ocultas
+              La disponibilidad se confirma directamente con el hotel.
             </p>
           </div>
         </div>

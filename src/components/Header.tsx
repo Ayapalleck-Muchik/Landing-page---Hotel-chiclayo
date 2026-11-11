@@ -64,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
               href="#servicios"
               className="hover:text-[#C5A059] transition-colors duration-200 py-1"
             >
-              Servicios
+              Lo esencial
             </a>
             <a
               href="#desayuno"
@@ -119,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
             onClick={() => setMobileMenuOpen(false)}
             className="block text-neutral-300 hover:text-[#C5A059] py-1 border-b border-neutral-800"
           >
-            Servicios
+            Lo esencial
           </a>
           <a
             href="#desayuno"

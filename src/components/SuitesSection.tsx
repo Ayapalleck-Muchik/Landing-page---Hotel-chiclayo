@@ -26,7 +26,7 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
               Habitaciones
             </span>
             <h2 className="text-3xl sm:text-5xl font-serif text-[#141312] font-light">
-              Nuestras Habitaciones en el Centro
+              Habitaciones para descansar
             </h2>
           </div>
           <div className="text-neutral-600 text-xs sm:text-sm font-light max-w-md mt-4 md:mt-0 leading-relaxed space-y-1">
@@ -53,8 +53,8 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                 alt={heroSuite.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
-                initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={reduceMotion ? false : { clipPath: 'inset(0 0 16% 0)', opacity: 0.7 }}
+                whileInView={{ clipPath: 'inset(0 0 0% 0)', opacity: 1 }}
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ duration: 0.7, ease: 'easeOut' }}
               />
@@ -143,8 +143,8 @@ export const SuitesSection: React.FC<SuitesSectionProps> = ({ onBookRoom }) => {
                         alt={room.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                         referrerPolicy="no-referrer"
-                        initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={reduceMotion ? false : { clipPath: 'inset(0 0 12% 0)', opacity: 0.7 }}
+                        whileInView={{ clipPath: 'inset(0 0 0% 0)', opacity: 1 }}
                         viewport={{ once: true, amount: 0.25 }}
                         transition={{ duration: 0.65, ease: 'easeOut' }}
                       />

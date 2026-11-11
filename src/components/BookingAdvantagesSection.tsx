@@ -1,5 +1,5 @@
 import React from 'react';
-import { Coffee, MapPin, MessageCircle, Sunrise } from 'lucide-react';
+import { Coffee, MessageCircle, Sunrise } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 
 const advantages = [
@@ -7,11 +7,6 @@ const advantages = [
     title: 'Desayuno incluido',
     description: 'Una pausa para empezar el día antes de salir a descubrir Chiclayo.',
     icon: Coffee,
-  },
-  {
-    title: 'A dos cuadras de la Plaza de Armas',
-    description: 'Una ubicación céntrica para recorrer a pie el corazón de la ciudad.',
-    icon: MapPin,
   },
   {
     title: 'Reserva directa por WhatsApp',
@@ -29,19 +24,19 @@ export const BookingAdvantagesSection: React.FC = () => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="border-b border-[#E4DCD0] bg-white py-20 sm:py-24" aria-labelledby="advantages-title">
+    <section className="border-b border-[#E4DCD0] bg-white py-20 sm:py-24" id="servicios" aria-labelledby="advantages-title">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid gap-8 border-b border-[#E4DCD0] pb-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end">
           <h2 id="advantages-title" className="max-w-xl font-serif text-[clamp(2.25rem,4.8vw,4.75rem)] font-medium leading-[0.98] tracking-[-0.03em] text-[#141312]">
-            Lo que acompaña tu estadía
+            Lo esencial para tu estadía
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-neutral-700 sm:text-lg">
-            Detalles claros para que elijas tu estadía con calma y te comuniques directamente con el hotel.
+            Información directa y confirmada para organizar tu llegada con calma.
           </p>
         </div>
 
         <motion.div
-          className="grid gap-x-8 gap-y-10 pt-10 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid gap-x-8 gap-y-10 pt-10 sm:grid-cols-3"
           initial={reduceMotion ? false : 'hidden'}
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}

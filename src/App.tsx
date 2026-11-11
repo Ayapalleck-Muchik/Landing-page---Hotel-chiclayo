@@ -5,7 +5,6 @@ import { HeroSection } from './components/HeroSection';
 import { BookingSearchBox } from './components/BookingSearchBox';
 import { StickyBookingBar } from './components/StickyBookingBar';
 import { BookingAdvantagesSection } from './components/BookingAdvantagesSection';
-import { BentoServices } from './components/BentoServices';
 import { SuitesSection } from './components/SuitesSection';
 import { BreakfastSection } from './components/BreakfastSection';
 import { LocationContactSection } from './components/LocationContactSection';
@@ -13,12 +12,10 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { BookingModal } from './components/BookingModal';
-import { BreakfastModal } from './components/BreakfastModal';
 import { Room } from './types';
 
 export default function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [isBreakfastModalOpen, setIsBreakfastModalOpen] = useState(false);
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [bookingParams, setBookingParams] = useState<{
     suiteId?: string;
@@ -61,19 +58,16 @@ export default function App() {
 
         <BookingAdvantagesSection />
 
-        {/* 05. Servicios confirmados del hotel */}
-        <BentoServices onOpenBreakfastDetails={() => setIsBreakfastModalOpen(true)} />
-
-        {/* 06. Colección de Habitaciones & Suites */}
+        {/* 05. Colección de Habitaciones & Suites */}
         <SuitesSection onBookRoom={handleBookRoom} />
 
-        {/* 07. Especialistas en tus Mañanas - Desayunos Premium de Cortesía */}
+        {/* 06. Desayuno incluido */}
         <BreakfastSection onOpenBooking={() => handleOpenBooking()} />
 
-        {/* 08. Ubicación en el centro de Chiclayo */}
+        {/* 07. Ubicación en el centro de Chiclayo */}
         <LocationContactSection />
 
-        {/* 09. Testimonios Verificados de Huéspedes */}
+        {/* 08. Opiniones recibidas */}
         <TestimonialsSection />
       </main>
 
@@ -85,7 +79,7 @@ export default function App() {
 
       <StickyBookingBar
         draft={bookingParams}
-        hidden={isBookingModalOpen || isBreakfastModalOpen || isWelcomeModalOpen}
+        hidden={isBookingModalOpen || isWelcomeModalOpen}
         onOpenBooking={() => handleOpenBooking(bookingParams)}
       />
 
@@ -104,11 +98,6 @@ export default function App() {
         initialCheckOut={bookingParams.checkOut}
       />
 
-      <BreakfastModal
-        isOpen={isBreakfastModalOpen}
-        onClose={() => setIsBreakfastModalOpen(false)}
-        onOpenBooking={() => handleOpenBooking()}
-      />
     </div>
   );
 }

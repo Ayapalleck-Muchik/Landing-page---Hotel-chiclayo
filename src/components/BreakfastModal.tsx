@@ -1,5 +1,6 @@
-import React from 'react';
-import { X, Coffee, Check, Clock, UtensilsCrossed, ArrowRight } from 'lucide-react';
+import React, { useRef } from 'react';
+import { X, Coffee, Check, Clock, ArrowRight } from 'lucide-react';
+import { useModalFocus } from '../utils/useModalFocus';
 
 interface BreakfastModalProps {
   isOpen: boolean;
@@ -12,11 +13,16 @@ export const BreakfastModal: React.FC<BreakfastModalProps> = ({
   onClose,
   onOpenBooking,
 }) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useModalFocus(isOpen, onClose, dialogRef, closeButtonRef);
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl bg-white border border-[#C5A059]/40 shadow-2xl overflow-hidden">
+      <div ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="breakfast-modal-title" className="relative w-full max-w-xl bg-white border border-[#C5A059]/40 shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="bg-[#141312] p-6 text-white flex items-center justify-between border-b border-[#C5A059]/30">
           <div className="flex items-center gap-3">
@@ -27,10 +33,11 @@ export const BreakfastModal: React.FC<BreakfastModalProps> = ({
               <span className="text-[#DFCA9D] text-[10px] tracking-[0.25em] uppercase font-semibold block">
                 Incluido con tu estadía
               </span>
-              <h3 className="text-xl font-serif font-light">Desayuno Diario Incluido</h3>
+              <h3 id="breakfast-modal-title" className="text-xl font-serif font-light">Desayuno Diario Incluido</h3>
             </div>
           </div>
           <button
+            ref={closeButtonRef}
             onClick={onClose}
             type="button"
             className="w-8 h-8 bg-white/10 hover:bg-[#C5A059] hover:text-[#141312] text-white flex items-center justify-center transition-colors cursor-pointer"

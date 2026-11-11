@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, ArrowRight, Coffee, MapPin, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowRight, MapPin, Sparkles } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 
 interface HeroSectionProps {
@@ -56,18 +56,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           A dos cuadras de la Plaza de Armas, encuentra un lugar para descansar, compartir y
           descubrir la ciudad a tu ritmo.
         </p>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-sm font-normal text-[#F4EFE7] sm:text-base">
-          <div className="flex items-center gap-2">
-            <Coffee className="h-4 w-4 text-[#DFCA9D]" aria-hidden="true" />
-            <span>Desayuno incluido</span>
-          </div>
-          <span className="hidden text-[#DFCA9D]/80 sm:inline" aria-hidden="true">•</span>
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-[#DFCA9D]" aria-hidden="true" />
-            <span>Frente a la comisaría</span>
-          </div>
-        </div>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <button

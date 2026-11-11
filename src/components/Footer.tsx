@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, MapPin, ShieldCheck, Coffee } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -31,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </div>
             </div>
             <p className="text-xs text-neutral-400 leading-relaxed font-light">
-              Un lugar cálido para descansar en el centro de Chiclayo. El desayuno está incluido con tu estadía.
+              Un lugar cálido para descansar y descubrir Chiclayo a tu ritmo.
             </p>
           </div>
 
@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </li>
               <li>
                 <a href="#servicios" className="hover:text-[#C5A059] transition">
-                  Servicios
+                  Lo esencial
                 </a>
               </li>
               <li>
@@ -64,28 +64,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             </ul>
           </div>
 
-          {/* Real Services & Mobility Notice */}
+          {/* Contact reference */}
           <div>
             <h4 className="text-white font-serif text-sm uppercase tracking-[0.25em] mb-5">
-              Durante tu estadía
+              Hotel Ayapalleck Muchik
             </h4>
-            <ul className="space-y-2 text-xs font-light text-neutral-400">
-              <li className="flex items-center gap-1.5">
-                <Coffee className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Desayuno incluido</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Frente a la comisaría</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Ubicación céntrica peatonal</span>
-              </li>
-              <li className="pt-2 text-[11px] text-neutral-500">
-                Check-in desde las 06:00 • Check-out hasta las 12:00 del día siguiente • Recepción 24h
-              </li>
-            </ul>
+            <p className="max-w-xs text-xs font-light leading-relaxed text-neutral-400">
+              Consulta directamente con el hotel para coordinar tu estadía y resolver cualquier detalle antes de tu llegada.
+            </p>
           </div>
 
           {/* Direct Reservations */}

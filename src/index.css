@@ -13,7 +13,6 @@
   --color-moche-linen: #EDE6DC;
   --color-moche-border: #E4DCD0;
 
-  /* Default used only while comparing the three approved type directions. */
   --font-serif: "DM Serif Display", Georgia, serif;
   --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
 
@@ -22,21 +21,6 @@
   --letter-spacing-widest: 0.1em;
   --letter-spacing-super-wide: 0.25em;
   --letter-spacing-monumental: 0.35em;
-}
-
-:root[data-typeface="fraunces"] {
-  --font-serif: "Fraunces", Georgia, serif;
-  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
-}
-
-:root[data-typeface="playfair"] {
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Jost", system-ui, -apple-system, sans-serif;
-}
-
-:root[data-typeface="dm-serif"] {
-  --font-serif: "DM Serif Display", Georgia, serif;
-  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
 }
 
 @layer base {
@@ -75,5 +59,20 @@
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

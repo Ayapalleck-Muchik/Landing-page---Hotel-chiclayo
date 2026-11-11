@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { X, ArrowRight } from 'lucide-react';
 import { Room } from '../types';
+import { useModalFocus } from '../utils/useModalFocus';
 
 interface RoomModalProps {
   room: Room | null;
@@ -10,14 +11,19 @@ interface RoomModalProps {
 
 export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSelectForBooking }) => {
   const [activeImageIdx, setActiveImageIdx] = useState(0);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useModalFocus(Boolean(room), onClose, dialogRef, closeButtonRef);
 
   if (!room) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white border border-[#C5A059]/40 shadow-2xl">
+      <div ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="room-modal-title" className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white border border-[#C5A059]/40 shadow-2xl">
         {/* Close Button */}
         <button
+          ref={closeButtonRef}
           onClick={onClose}
           type="button"
           className="absolute top-4 right-4 z-20 w-10 h-10 bg-[#141312]/80 hover:bg-[#141312] text-white flex items-center justify-center transition-colors cursor-pointer"
@@ -75,7 +81,7 @@ export const RoomModal: React.FC<RoomModalProps> = ({ room, onClose, onSelectFor
                 <span>{room.bedType}</span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-serif text-[#141312] font-light leading-snug mb-3">
+              <h2 id="room-modal-title" className="text-2xl sm:text-3xl font-serif text-[#141312] font-light leading-snug mb-3">
                 {room.title}
               </h2>
 
