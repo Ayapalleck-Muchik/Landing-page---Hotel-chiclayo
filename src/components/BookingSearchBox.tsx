@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { hotelRooms } from '../data/roomsData';
 import { addLocalDays, formatLocalDate, isValidStay, minimumCheckOutDate } from '../utils/bookingDates';
@@ -9,9 +9,10 @@ interface BookingSearchBoxProps {
     checkOut: string;
     suiteId: string;
   }) => void;
+  onDraftChange?: (params: { checkIn: string; checkOut: string; suiteId: string }) => void;
 }
 
-export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) => {
+export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch, onDraftChange }) => {
   // Set default dates using the visitor's local calendar day.
   const today = new Date();
   const tomorrow = addLocalDays(today, 1);
@@ -21,6 +22,10 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
   const [checkOut, setCheckOut] = useState(formatLocalDate(nextDay));
   const [suiteId, setSuiteId] = useState(hotelRooms[0].id);
   const [dateError, setDateError] = useState('');
+
+  useEffect(() => {
+    onDraftChange?.({ checkIn, checkOut, suiteId });
+  }, [checkIn, checkOut, onDraftChange, suiteId]);
 
   const handleCheckInChange = (value: string) => {
     setCheckIn(value);
@@ -47,12 +52,12 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-[#C5A059] rounded-full animate-pulse" />
             <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-neutral-800">
-              Verificar Disponibilidad • Tarifas Exclusivas
+              Consulta disponibilidad
             </span>
           </div>
           <span className="text-[11px] text-neutral-500 tracking-wider flex items-center gap-1.5">
             <Sparkles className="w-3 h-3 text-[#C5A059]" />
-            Mejor tarifa garantizada directa
+            Elige fechas y habitación
           </span>
         </div>
 
@@ -60,12 +65,13 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-5 items-end">
           {/* Check In Field */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+            <label htmlFor="search-check-in" className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
               Llegada
             </label>
             <div className="relative">
               <input
                 type="date"
+                id="search-check-in"
                 value={checkIn}
                 min={formatLocalDate(today)}
                 onChange={(e) => handleCheckInChange(e.target.value)}
@@ -77,12 +83,13 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
 
           {/* Check Out Field */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+            <label htmlFor="search-check-out" className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
               Salida
             </label>
             <div className="relative">
               <input
                 type="date"
+                id="search-check-out"
                 value={checkOut}
                 min={minimumCheckOutDate(checkIn)}
                 onChange={(e) => {
@@ -97,10 +104,11 @@ export const BookingSearchBox: React.FC<BookingSearchBoxProps> = ({ onSearch }) 
 
           {/* Room Selection */}
           <div>
-            <label className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
+            <label htmlFor="search-room" className="block text-xs font-semibold text-neutral-700 uppercase tracking-[0.18em] mb-2">
               Habitación
             </label>
             <select
+              id="search-room"
               value={suiteId}
               onChange={(e) => setSuiteId(e.target.value)}
               className="w-full rounded-lg bg-[#FAF8F5] border border-neutral-300 focus:border-[#C5A059] focus:ring-2 focus:ring-[#C5A059]/30 px-4 py-3.5 text-sm text-neutral-800 outline-none transition cursor-pointer"

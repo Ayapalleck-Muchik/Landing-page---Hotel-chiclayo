@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, MapPin, ShieldCheck, Coffee } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface FooterProps {
   onOpenBooking: () => void;
@@ -31,29 +31,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </div>
             </div>
             <p className="text-xs text-neutral-400 leading-relaxed font-light">
-              Tu descanso perfecto en el centro de Chiclayo. Confort moderno, seguridad 24/7 frente a
-              la comisaría y el mejor desayuno de cortesía cada mañana.
+              Un lugar cálido para descansar y descubrir Chiclayo a tu ritmo.
             </p>
-            <div className="flex gap-3 text-neutral-400">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook del Hotel Ayapalleck Muchik"
-                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center hover:border-[#C5A059] hover:text-[#C5A059] transition"
-              >
-                <span className="text-[11px] font-bold">f</span>
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram del Hotel Ayapalleck Muchik"
-                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center hover:border-[#C5A059] hover:text-[#C5A059] transition"
-              >
-                <span className="text-[11px] font-bold">ig</span>
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -69,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </li>
               <li>
                 <a href="#servicios" className="hover:text-[#C5A059] transition">
-                  Servicios
+                  Lo esencial
                 </a>
               </li>
               <li>
@@ -79,34 +58,20 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </li>
               <li>
                 <a href="#ubicacion" className="hover:text-[#C5A059] transition">
-                  Ubicación &amp; Seguridad
+                  Ubicación
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Real Services & Mobility Notice */}
+          {/* Contact reference */}
           <div>
             <h4 className="text-white font-serif text-sm uppercase tracking-[0.25em] mb-5">
-              Políticas Clave
+              Hotel Ayapalleck Muchik
             </h4>
-            <ul className="space-y-2 text-xs font-light text-neutral-400">
-              <li className="flex items-center gap-1.5">
-                <Coffee className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Desayuno incluido de cortesía</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Frente a la comisaría (Seguridad 24/7)</span>
-              </li>
-              <li className="flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span>Ubicación céntrica peatonal</span>
-              </li>
-              <li className="pt-2 text-[11px] text-neutral-500">
-                Check-in 14:00 • Check-out 12:00 • Recepción 24h
-              </li>
-            </ul>
+            <p className="max-w-xs text-xs font-light leading-relaxed text-neutral-400">
+              Consulta directamente con el hotel para coordinar tu estadía y resolver cualquier detalle antes de tu llegada.
+            </p>
           </div>
 
           {/* Direct Reservations */}
@@ -115,15 +80,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               Reservas Directas
             </h4>
             <p className="text-xs text-neutral-400 mb-5 leading-relaxed font-light">
-              Asegura tu habitación con la mejor tarifa garantizada para la visita papal y estancias
-              en Chiclayo.
+              Consulta fechas y habitaciones directamente con el hotel.
             </p>
             <button
               onClick={onOpenBooking}
               type="button"
               className="inline-flex items-center gap-2 border border-[#C5A059]/60 text-[#C5A059] hover:bg-[#C5A059] hover:text-[#141312] px-5 py-3 text-[11px] uppercase tracking-[0.25em] font-medium transition duration-300 w-full justify-center cursor-pointer active:scale-95"
             >
-              <span>Reservar Ahora</span>
+              <span>Consultar disponibilidad</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

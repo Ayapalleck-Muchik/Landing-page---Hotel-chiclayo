@@ -3,7 +3,8 @@ import { WelcomeModal } from './components/WelcomeModal';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
 import { BookingSearchBox } from './components/BookingSearchBox';
-import { BentoServices } from './components/BentoServices';
+import { StickyBookingBar } from './components/StickyBookingBar';
+import { BookingAdvantagesSection } from './components/BookingAdvantagesSection';
 import { SuitesSection } from './components/SuitesSection';
 import { BreakfastSection } from './components/BreakfastSection';
 import { LocationContactSection } from './components/LocationContactSection';
@@ -11,12 +12,11 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { BookingModal } from './components/BookingModal';
-import { BreakfastModal } from './components/BreakfastModal';
 import { Room } from './types';
 
 export default function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [isBreakfastModalOpen, setIsBreakfastModalOpen] = useState(false);
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [bookingParams, setBookingParams] = useState<{
     suiteId?: string;
     checkIn?: string;
@@ -48,24 +48,26 @@ export default function App() {
       {/* Main Content Sections */}
       <main className="flex-1">
         {/* 03. Hero Section con Copywriting Persuasivo Urbano */}
-        <HeroSection onOpenBooking={() => handleOpenBooking()} />
+        <HeroSection
+          onOpenBooking={() => handleOpenBooking()}
+          onOpenPapalAnnouncement={() => setIsWelcomeModalOpen(true)}
+        />
 
         {/* 04. Barra de Disponibilidad Acoplada */}
-        <BookingSearchBox onSearch={handleSearchDates} />
+        <BookingSearchBox onSearch={handleSearchDates} onDraftChange={setBookingParams} />
 
-        {/* 05. Bento Box de Servicios (Desayuno Premium, Seguridad frente a Comisaría, Punto de Partida Peatonal, Wi-Fi) */}
-        <BentoServices onOpenBreakfastDetails={() => setIsBreakfastModalOpen(true)} />
+        <BookingAdvantagesSection />
 
-        {/* 06. Colección de Habitaciones & Suites */}
+        {/* 05. Colección de Habitaciones & Suites */}
         <SuitesSection onBookRoom={handleBookRoom} />
 
-        {/* 07. Especialistas en tus Mañanas - Desayunos Premium de Cortesía */}
+        {/* 06. Desayuno incluido */}
         <BreakfastSection onOpenBooking={() => handleOpenBooking()} />
 
-        {/* 08. Ubicación Céntrica en Chiclayo & Seguridad 24/7 (Frente a Comisaría) */}
+        {/* 07. Ubicación en el centro de Chiclayo */}
         <LocationContactSection />
 
-        {/* 09. Testimonios Verificados de Huéspedes */}
+        {/* 08. Opiniones recibidas */}
         <TestimonialsSection />
       </main>
 
@@ -75,8 +77,18 @@ export default function App() {
       {/* 11. Botón Flotante de WhatsApp (ÚNICO elemento verde en la app) */}
       <WhatsAppButton />
 
+      <StickyBookingBar
+        draft={bookingParams}
+        hidden={isBookingModalOpen || isWelcomeModalOpen}
+        onOpenBooking={() => handleOpenBooking(bookingParams)}
+      />
+
       {/* Modals Interactivos */}
-      <WelcomeModal onCheckAvailability={() => handleOpenBooking()} />
+      <WelcomeModal
+        isOpen={isWelcomeModalOpen}
+        onClose={() => setIsWelcomeModalOpen(false)}
+        onCheckAvailability={() => handleOpenBooking()}
+      />
 
       <BookingModal
         isOpen={isBookingModalOpen}
@@ -86,11 +98,6 @@ export default function App() {
         initialCheckOut={bookingParams.checkOut}
       />
 
-      <BreakfastModal
-        isOpen={isBreakfastModalOpen}
-        onClose={() => setIsBreakfastModalOpen(false)}
-        onOpenBooking={() => handleOpenBooking()}
-      />
     </div>
   );
 }

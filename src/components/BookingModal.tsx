@@ -9,6 +9,7 @@ import {
   isValidStay,
   minimumCheckOutDate,
 } from '../utils/bookingDates';
+import { useModalFocus } from '../utils/useModalFocus';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -45,6 +46,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [cooldownUntil, setCooldownUntil] = useState<number | null>(null);
   const [cooldownSeconds, setCooldownSeconds] = useState(0);
   const isOpeningWhatsAppRef = useRef(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useModalFocus(isOpen, onClose, dialogRef, closeButtonRef);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -63,17 +68,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     setSubmitted(false);
     setDateError('');
   }, [isOpen, initialRoomId, initialCheckIn, initialCheckOut]);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
-    };
-
-    window.addEventListener('keydown', closeOnEscape);
-    return () => window.removeEventListener('keydown', closeOnEscape);
-  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (!cooldownUntil) return;
@@ -150,18 +144,19 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-white border border-[#C5A059]/40 shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
+      <div ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" className="relative w-full max-w-2xl bg-white border border-[#C5A059]/40 shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
         {/* Modal Header */}
         <div className="bg-[#141312] p-5 sm:p-6 text-white flex items-center justify-between border-b border-[#C5A059]/30">
           <div>
             <span className="text-[#DFCA9D] text-[10px] tracking-[0.35em] uppercase font-semibold block mb-1">
               Hotel Boutique Chiclayo • Desayuno Incluido
             </span>
-            <h3 className="text-xl sm:text-2xl font-serif font-light">
+            <h3 id="booking-modal-title" className="text-xl sm:text-2xl font-serif font-light">
               Reservar Habitación en el Centro
             </h3>
           </div>
           <button
+            ref={closeButtonRef}
             onClick={onClose}
             type="button"
             className="w-9 h-9 bg-white/10 hover:bg-[#C5A059] hover:text-[#141312] text-white flex items-center justify-center transition-colors cursor-pointer"

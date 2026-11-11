@@ -9,9 +9,9 @@ export const hotelRooms: Room[] = [
     categoryLabel: '01 • King',
     bedType: '1 Cama King',
     badge: '01 • King',
-    tagline: 'Máximo confort y amplitud en el centro de Chiclayo',
+    tagline: 'Un espacio amplio para descansar al final del día',
     description:
-      'Nuestra suite más espaciosa y distinguida. Diseñada con acabados cálidos, sala de estar integrada, amplio ventanal con aislamiento acústico superior y baño privado con finos detalles de relajación.',
+      'Una habitación amplia para hacer una pausa, descansar y disfrutar tu estadía en Chiclayo.',
     pricePerNightPen: 150,
     surfaceM2: 52,
     image: '/images-hotel/KING.jpg',
@@ -20,10 +20,8 @@ export const hotelRooms: Room[] = [
       '/images-hotel/azotea.jpg',
     ],
     features: [
-      { label: '1 Cama King' },
-      { label: 'Desayuno de Cortesía Incluido' },
-      { label: 'Aislamiento Termoacústico' },
-      { label: 'Wi-Fi de Alta Velocidad Libre' },
+      { label: 'Cama King' },
+      { label: 'Desayuno incluido' },
     ],
     amenities: [
       'Delicioso desayuno de cortesía cada mañana',
@@ -42,9 +40,9 @@ export const hotelRooms: Room[] = [
     categoryLabel: '02 • Matrimonial',
     bedType: '1 Cama Matrimonial',
     badge: '02 • Matrimonial',
-    tagline: 'Ideal para profesionales y visitantes de la ruta histórica',
+    tagline: 'Una pausa cómoda en el centro de Chiclayo',
     description:
-      'Equipada para quienes buscan descansar con total serenidad en pleno centro urbano. Cuenta con escritorio funcional, iluminación cálida de autor y conectividad de alta velocidad ininterrumpida.',
+      'Un ambiente pensado para descansar después de un día de trabajo, visitas o recorridos por la ciudad.',
     pricePerNightPen: 100,
     surfaceM2: 36,
     image: '/images-hotel/MATRIMONIAL.jpg',
@@ -53,10 +51,8 @@ export const hotelRooms: Room[] = [
       '/images-hotel/desayuno.jpg',
     ],
     features: [
-      { label: '1 Cama Matrimonial' },
-      { label: 'Escritorio de Trabajo' },
-      { label: 'Climatizador Silencioso' },
-      { label: 'Desayuno de Cortesía' },
+      { label: 'Cama matrimonial' },
+      { label: 'Desayuno incluido' },
     ],
     amenities: [
       'Desayuno diario incluido para recargar energías',
@@ -74,9 +70,9 @@ export const hotelRooms: Room[] = [
     categoryLabel: '03 • Doble',
     bedType: '2 Camas Twin o 1 Matrimonial',
     badge: '03 • Doble',
-    tagline: 'Versatilidad, silencio y comodidad para tu visita a Chiclayo',
+    tagline: 'Una opción flexible para compartir la estadía',
     description:
-      'Configuración flexible para dos viajeros, parejas o peregrinos que visitan Chiclayo. Silenciosa, ventilada y con acceso directo a los corredores interiores del hotel.',
+      'Una alternativa práctica para quienes viajan en pareja, con familia o acompañados.',
     pricePerNightPen: 120,
     surfaceM2: 32,
     image: '/images-hotel/DOBLES.jpg',
@@ -85,10 +81,8 @@ export const hotelRooms: Room[] = [
       '/images-hotel/recepcion.jpg',
     ],
     features: [
-      { label: '2 Twin o 1 Cama Matrimonial' },
-      { label: 'Desayuno de Cortesía' },
-      { label: 'Wi-Fi Rápido Incluido' },
-      { label: 'Baño Privado Completo' },
+      { label: 'Dos camas o una matrimonial' },
+      { label: 'Desayuno incluido' },
     ],
     amenities: [
       'Desayuno de cortesía recién preparado',

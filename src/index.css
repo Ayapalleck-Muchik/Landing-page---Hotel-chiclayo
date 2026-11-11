@@ -13,9 +13,8 @@
   --color-moche-linen: #EDE6DC;
   --color-moche-border: #E4DCD0;
 
-  /* Typography: Marcellus (Primary Serif Titles) & Jost (Secondary Sans Clean Body) */
-  --font-serif: "Marcellus", "Playfair Display", Georgia, serif;
-  --font-sans: "Jost", system-ui, -apple-system, sans-serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
 
   --letter-spacing-wide: 0.025em;
   --letter-spacing-wider: 0.05em;
@@ -30,15 +29,22 @@
     font-weight: 300;
     background-color: var(--color-moche-bone);
     color: var(--color-moche-dark);
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   h1, h2, h3, h4, h5, h6, .font-serif {
     font-family: var(--font-serif);
-    letter-spacing: 0.035em;
+    letter-spacing: -0.01em;
   }
 
   p, span, a, li, input, select, textarea {
     font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-moche-gold);
+    outline-offset: 3px;
   }
 }
 
@@ -48,4 +54,25 @@
 
 .text-balance {
   text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-8 text-[11px] font-medium tracking-[0.22em] uppercase text-neutral-300">
+          <nav className="hidden lg:flex items-center space-x-8 text-sm font-medium tracking-[0.06em] text-neutral-200">
             <a
               href="#habitaciones"
               className="hover:text-[#C5A059] transition-colors duration-200 py-1"
@@ -64,7 +64,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
               href="#servicios"
               className="hover:text-[#C5A059] transition-colors duration-200 py-1"
             >
-              Servicios
+              Lo esencial
             </a>
             <a
               href="#desayuno"
@@ -76,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
               href="#ubicacion"
               className="hover:text-[#C5A059] transition-colors duration-200 py-1"
             >
-              Ubicación &amp; Seguridad
+            Ubicación
             </a>
           </nav>
 
@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
               type="button"
               className="hidden sm:inline-flex items-center gap-2.5 bg-[#C5A059] hover:bg-[#9e7d38] text-[#141312] hover:text-white text-xs uppercase tracking-[0.22em] font-semibold px-5 py-2.5 transition-all duration-300 active:scale-95 cursor-pointer shadow-md"
             >
-              <span>Reservar Ahora</span>
+              <span>Consultar disponibilidad</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
 
@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#1E1D1B] border-b border-[#C5A059]/30 px-6 py-6 space-y-4 text-xs uppercase tracking-[0.22em] animate-in fade-in slide-in-from-top-4 duration-200">
+        <div className="lg:hidden bg-[#1E1D1B] border-b border-[#C5A059]/30 px-6 py-6 space-y-4 text-sm tracking-[0.06em] animate-in fade-in slide-in-from-top-4 duration-200">
           <a
             href="#habitaciones"
             onClick={() => setMobileMenuOpen(false)}
@@ -119,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
             onClick={() => setMobileMenuOpen(false)}
             className="block text-neutral-300 hover:text-[#C5A059] py-1 border-b border-neutral-800"
           >
-            Servicios
+            Lo esencial
           </a>
           <a
             href="#desayuno"
@@ -133,7 +133,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
             onClick={() => setMobileMenuOpen(false)}
             className="block text-neutral-300 hover:text-[#C5A059] py-1 border-b border-neutral-800"
           >
-            Ubicación &amp; Seguridad (Frente a Comisaría)
+              Ubicación
           </a>
 
           <div className="pt-3">
@@ -145,7 +145,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenBooking }) => {
               type="button"
               className="w-full flex items-center justify-center gap-2 bg-[#C5A059] hover:bg-[#9e7d38] text-[#141312] py-3 text-xs font-semibold tracking-[0.25em] uppercase transition-colors"
             >
-              <span>Reservar Ahora</span>
+              <span>Consultar disponibilidad</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
