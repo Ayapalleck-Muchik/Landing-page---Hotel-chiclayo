@@ -101,7 +101,7 @@ export const ImmersiveHotelWorld: React.FC = () => {
   const scene = hotelScenes[activeScene];
 
   return (
-    <section ref={worldRef} className="relative bg-[#141312]" aria-label="Recorrido visual del hotel">
+    <section ref={worldRef} id="recorrido" className="relative bg-[#141312]" aria-label="Recorrido visual del hotel">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         {hotelScenes.map((item, index) => (
           <ScrollScrubVideo

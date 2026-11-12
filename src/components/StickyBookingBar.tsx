@@ -30,6 +30,7 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
 }) => {
   const reduceMotion = useReducedMotion();
   const [isVisible, setIsVisible] = useState(false);
+  const [isInImmersiveWorld, setIsInImmersiveWorld] = useState(false);
   const room = hotelRooms.find((item) => item.id === draft.suiteId);
 
   useEffect(() => {
@@ -44,7 +45,18 @@ export const StickyBookingBar: React.FC<StickyBookingBarProps> = ({
     return () => window.removeEventListener('scroll', updateVisibility);
   }, []);
 
-  if (hidden || !isVisible) return null;
+  useEffect(() => {
+    const world = document.getElementById('recorrido');
+    if (!world) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInImmersiveWorld(entry.isIntersecting),
+      { threshold: 0.01 },
+    );
+    observer.observe(world);
+    return () => observer.disconnect();
+  }, []);
+
+  if (hidden || !isVisible || isInImmersiveWorld) return null;
 
   return (
     <motion.div
