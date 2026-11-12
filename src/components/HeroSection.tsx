@@ -1,7 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { ArrowDown, ArrowRight, MapPin, Sparkles } from 'lucide-react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
-import { CinematicHeroMedia } from './CinematicHeroMedia';
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
@@ -13,12 +12,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenPapalAnnouncement,
 }) => {
   const reduceMotion = useReducedMotion();
-  const heroRef = useRef<HTMLElement>(null);
   const { scrollY } = useScroll();
   const imageY = useTransform(scrollY, [0, 900], [0, 52]);
 
   return (
-    <section ref={heroRef} className="relative flex min-h-[88svh] items-center justify-center overflow-hidden bg-[#141312] sm:min-h-[90svh]">
+    <section className="relative flex min-h-[88svh] items-center justify-center overflow-hidden bg-[#141312] sm:min-h-[90svh]">
       <div className="absolute inset-0 overflow-hidden bg-[#141312]" aria-hidden="true">
         <motion.div className="absolute -inset-x-4 -inset-y-12" style={reduceMotion ? undefined : { y: imageY }}>
           <motion.div
@@ -38,8 +36,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="absolute inset-0 bg-gradient-to-b from-[#141312]/65 via-[#141312]/28 to-[#141312]/78" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#141312]/75" />
       </div>
-
-      <CinematicHeroMedia sectionRef={heroRef} />
 
       <motion.div
         className="relative z-10 mx-auto max-w-6xl px-6 pb-28 pt-28 text-center sm:px-8 sm:pt-32"

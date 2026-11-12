@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { WelcomeModal } from './components/WelcomeModal';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
+import { ImmersiveHotelWorld } from './components/ImmersiveHotelWorld';
 import { BookingSearchBox } from './components/BookingSearchBox';
 import { StickyBookingBar } from './components/StickyBookingBar';
 import { BookingAdvantagesSection } from './components/BookingAdvantagesSection';
@@ -52,6 +53,8 @@ export default function App() {
           onOpenBooking={() => handleOpenBooking()}
           onOpenPapalAnnouncement={() => setIsWelcomeModalOpen(true)}
         />
+
+        <ImmersiveHotelWorld />
 
         {/* 04. Barra de Disponibilidad Acoplada */}
         <BookingSearchBox onSearch={handleSearchDates} onDraftChange={setBookingParams} />

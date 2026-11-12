@@ -1,56 +1,67 @@
-# Integración audiovisual: fachada
+# Producción audiovisual y Scroll World
 
-## Alcance de esta entrega
+## Decisión editorial
 
-La fotografía de fachada sigue siendo la imagen principal de la portada. El único video disponible,
-`imagenes-hotel/tmpparxd9xw.mp4`, se trata como un detalle cinematográfico de escritorio y no como
-una recreación arquitectónica ni como un fondo de pantalla completa.
+La portada conserva `imagenes-hotel/fachada.jpg` como imagen principal. El único clip exterior
+disponible, `recepcion-video.mp4`, altera de forma visible las letras del letrero durante el
+movimiento; por fidelidad arquitectónica se rechaza como escena de llegada. El recorrido que sigue
+la portada es una secuencia editorial de ambientes reales, no una simulación de un paseo físico
+continuo entre habitaciones.
 
-## Material y decisión editorial
+Cada cambio de ambiente se comunica mediante una disolvencia breve. No se pretende que la fachada,
+la recepción, las habitaciones y la azotea sean partes de una misma toma de cámara.
 
-- Fotografía original de fachada: `imagenes-hotel/fachada.jpg` (1536 × 2752 px).
-- Video fuente recibido: H.264, 832 × 480 px, 16 fps, 3.5625 s y sin audio.
-- Evaluación: el encuadre se acerca a la entrada, pero no conserva el letrero completo durante toda
-  la toma. Por su resolución y duración, no es apto para sustituir la fotografía de portada ni para
-  presentarse como video 1080p.
-- Decisión: se conserva íntegro el video fuente y se publica una versión optimizada a tamaño nativo
-  en una ventana 16:9 de escritorio. La fotografía real queda visible detrás y conserva la fachada,
-  entrada y señalización completa.
+## Auditoría de materiales
 
-## Entregables web
+| Fuente | Resolución y duración | Estado | Uso |
+| --- | --- | --- | --- |
+| `recepcion-video.mp4` | 832 × 480, 16 fps, 3.5625 s | Rechazado | Deforma el letrero exterior. No se publica. |
+| `video-recepcion.mp4` | 832 × 480, 16 fps, 3.5625 s | Usable con limitaciones | Recepción. Conserva de forma más fiel el mobiliario y personal. |
+| `king-video.mp4` | 832 × 480, 16 fps, 3.5625 s | Usable con limitaciones | Escena de Habitación King. |
+| `matrimonial-video.mp4` | 832 × 480, 16 fps, 3.5625 s | Usable con limitaciones | Escena de Habitación Matrimonial. |
+| `desayuno-video.mp4` | 832 × 480, 16 fps, 3.5625 s | Usable con limitaciones | Escena de desayuno. |
+| `azotea-video.mp4` | 832 × 624, 16 fps, 3.5625 s | Usable con limitaciones | Escena de azotea; su proporción es 4:3. |
+| `tmpparxd9xw.mp4` | 832 × 480, 16 fps, 3.5625 s | Rechazado | Clip inicial de fachada, con la misma limitación de señalización. |
 
-- `public/videos-hotel/fachada-scroll.mp4`: H.264, 832 × 480 px, yuv420p, 16 fps, 3.5625 s, sin
-  audio, con `faststart` y keyframes cada 6 fotogramas.
-- `public/images-hotel/fachada-scroll-poster.webp`: póster WebP derivado del primer fotograma.
-- `src/components/CinematicHeroMedia.tsx`: carga opcional y sincronización de tiempo con scroll.
+Todos los clips carecen de pista de audio. La resolución disponible es inferior al estándar de
+entrega recomendado para un vídeo fullscreen. Por eso cada escena mantiene una fotografía original
+de alta resolución como póster, fallback de red, alternativa móvil y alternativa de movimiento
+reducido. No se escala ningún clip para presentarlo como 1080p.
 
-No se escaló el clip ni se usó generación, interpolación o outpainting.
+## Activos web
 
-## Comportamiento de scroll y rendimiento
+Los archivos de `public/videos-hotel/` están codificados en H.264, yuv420p, sin audio, con
+`faststart` y GOP de 6 fotogramas. Conservan resolución y duración nativas. Los pósters WebP se
+guardan en `public/images-hotel/` y se extraen del primer fotograma de cada clip.
 
-El video se descarga únicamente cuando su contenedor está próximo al viewport y solo a partir del
-breakpoint de escritorio (`1024 px`). Se obtiene como `Blob` para evitar búsquedas HTTP parciales
-inestables. Un listener pasivo de scroll agrupa cálculos en `requestAnimationFrame` y escribe
-`currentTime` únicamente cuando no hay una búsqueda activa. El mismo flujo admite avance y
-retroceso; no reproduce el video automáticamente ni captura el scroll.
+Las versiones web publicadas son:
 
-El póster permanece visible hasta que el navegador pueda presentar un fotograma. Ante fallo de
-red o decodificación, la imagen de portada se mantiene como alternativa sin pantalla negra.
+- `recepcion-scroll.mp4`
+- `king-scroll.mp4`
+- `matrimonial-scroll.mp4`
+- `desayuno-scroll.mp4`
+- `azotea-scroll.mp4`
 
-## Accesibilidad y alternativas
+Los originales en `imagenes-hotel/` no se alteran ni se incluyen en el commit.
 
-El detalle de video se oculta en móvil, con `prefers-reduced-motion` y con Save-Data. La foto
-principal, el contenido, la navegación, los modales y las acciones de reserva no cambian ni quedan
-interceptados por la capa audiovisual.
+## Motor de escenas
 
-## Siguiente material necesario para una secuencia continua
+`ImmersiveHotelWorld` usa marcadores de scroll dentro de una superficie sticky a pantalla completa.
+El motor agrupa el cálculo de scroll en `requestAnimationFrame`; los cambios de escena actualizan
+React solo al cruzar de ambiente. Cada `ScrollScrubVideo` recibe una fracción de progreso y actualiza
+`currentTime` con seeks coalescidos, manteniendo siempre el vídeo pausado.
 
-Para una experiencia Scroll World de pantalla completa se necesita rodaje real, no generación:
+Los recursos se solicitan con `fetch` y `Blob` solo cuando el recorrido se aproxima al viewport. Se
+mantiene la escena activa y una vecina en memoria; las escenas alejadas liberan su URL temporal.
+Antes de pintar el primer fotograma y ante cualquier error, el póster queda visible.
 
-1. Toma horizontal estabilizada de fachada, aproximación lenta, 1920 × 1080 o superior, 24–30 fps.
-2. Toma final de fachada e inicio de recepción con punto de corte visualmente compatible.
-3. Tomas auténticas de recepción, habitaciones, desayuno y azotea, con encuadres inicial/final
-   acordados antes de grabar.
-4. Versiones verticales dedicadas para móvil cuando el proyecto las justifique.
+En móvil, Save Data o `prefers-reduced-motion`, no se descarga ni reproduce video: se muestran las
+fotografías reales sin recorte destructivo. No hay versiones verticales nativas, por lo que este
+fallback es deliberado y no pretende sustituir una producción móvil dedicada.
 
-Hasta disponer de esas tomas, no se debe afirmar continuidad física entre espacios distintos.
+## Producción pendiente para calidad de entrega
+
+Para sustituir los fallbacks por vídeo fullscreen de calidad final se necesita rodaje real a
+1920 × 1080 o superior, 24 a 30 fps, con tomas horizontales y verticales dedicadas. Cada ambiente
+debería rodarse con encuadres iniciales y finales previstos, respetando materiales, señalización y
+personas reales. Solo con tomas compatibles se debe evaluar una continuidad física entre espacios.
